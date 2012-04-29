@@ -37,7 +37,8 @@ class IndexHandler(web.RequestHandler):
         phrase = self.get_argument('phrase')
         n = 20
 
-        result = dummy_data(corpus, corpus_param, model, model_param, n)
+        result = dummy_data(corpus, corpus_param, model, 
+                            model_param, phrase, n)
 
         self.write(result)
 
@@ -50,6 +51,6 @@ if __name__ == "__main__":
         
     application = web.Application(handlers)
 
-    application.listen(8080)
+    application.listen(8088)
     ioloop.IOLoop.instance().start()
 
