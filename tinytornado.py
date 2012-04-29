@@ -23,19 +23,56 @@ model_instances = {
     
 stored_results = dict()
 
+class CorpusError(Exception):
+    pass
+
+class ModelError(Exception):
+    pass
+
+class PhraseError(Exception):
+    pass
+
+
+def get_model(corpus, corpus_param, model, model_param):
+    
+    try:
+        return model_instances[(corpus, corpus_param, 
+                                model, model_param)]
+    except KeyError:
+
+        corpora = [(c, cp) for (c, cp, m, mp) in model_instances.keys()]
+        print 'Corpora', corpora
+        models = [(m, mp) for (c, cp, m, mp) in model_instances.keys()]
+        print 'Models', models
+
+        if (corpus, corpus_param) not in corpora:
+            raise CorpusError(corpus + ' is not available')
+        if (model, model_param) not in models:
+            raise ModelError(model + ' is not available')
+
+
+
 def get_similarities(corpus, corpus_param, model, model_param, 
                      phrase, n):
 
-    if (corpus, corpus_param, model, model_param, phrase) in stored_results:
+    if (corpus, corpus_param, model, model_param, phrase)\
+            in stored_results:
         print 'Found stored result'
         result = stored_results[(corpus, corpus_param, model,
                                  model_param, phrase)]
+
     else:
-        model_inst = model_instances[(corpus, corpus_param, 
-                                 model, model_param)]
-        result = model_inst.similar(phrase)
-        stored_results[(corpus, corpus_param, model, model_param, phrase)] = result
-        print stored_results.keys()
+        model_inst = get_model(corpus, corpus_param, 
+                               model, model_param)
+        try:
+            result = model_inst.similar(phrase)
+        except:
+            raise PhraseError('No word in ' + phrase + ' appears in corpus')
+
+        stored_results[
+            (corpus, corpus_param, model, model_param, phrase)
+            ] = result
+
 
     if result[0][0] == phrase:
         result = result[1:n+1]
@@ -50,7 +87,6 @@ def get_similarities(corpus, corpus_param, model, model_param,
     return result
 
 
-# TODO: add concurrency
 
 class IndexHandler(web.RequestHandler):
 
@@ -66,11 +102,31 @@ class IndexHandler(web.RequestHandler):
         phrase = self.get_argument('phrase')
         n = 20
 
-        result = get_similarities(corpus, corpus_param, model,
-                                  model_param, phrase, n)
+        try:
+            result = get_similarities(corpus, corpus_param, model,
+                                      model_param, phrase, n)
+            self.finish(result)
+            
+        except CorpusError:
+            self.send_error( reason = 'corpus')
+       
+        except ModelError:
+            self.send_error( reason = 'model')
+        
+        except PhraseError:
+            self.send_error( reason = 'phrase')
 
-        self.write(result)
 
+    def write_error(self, status_code, reason = None, **kwargs):
+
+        if reason == 'corpus':
+            self.finish('Corpus not available')
+        elif reason == 'model':
+            self.finish('Model not available')
+        elif reason == 'phrase':
+            self.finish('Phrase not available')
+        else:
+            self.finish('Uncaught error')
 
 
 if __name__ == "__main__":
@@ -80,6 +136,6 @@ if __name__ == "__main__":
         
     application = web.Application(handlers)
 
-    application.listen(8080)
+    application.listen(8088)
     ioloop.IOLoop.instance().start()
 
