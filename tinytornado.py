@@ -1,25 +1,54 @@
 #!/usr/bin/python
 
-import os.path
 from tornado import ioloop, web
-import time
-import random
+from inphosemantics import Model
 
-def dummy_data(corpus, corpus_param, model, model_param, phrase, n):
+model_instances = {
+    ('sep', 'complete', 'beagle', 'environment'):\
+        Model('sep','complete','beagle','environment'),
+    ('sep', 'complete', 'beagle', 'context'):\
+        Model('sep','complete','beagle','context'),
+    ('sep', 'complete', 'beagle', 'order'):\
+        Model('sep','complete','beagle','order'),
+    ('sep', 'complete', 'beagle', 'composite'):\
+        Model('sep','complete','beagle','composite'),
+    ('iep', 'complete', 'beagle', 'environment'):\
+        Model('iep','complete','beagle','environment'),
+    ('iep', 'complete', 'beagle', 'context'):\
+        Model('iep','complete','beagle','context'),
+    ('iep', 'complete', 'beagle', 'order'):\
+        Model('iep','complete','beagle','order'),
+    ('iep', 'complete', 'beagle', 'composite'):\
+        Model('iep','complete','beagle','composite')}
     
-    result_phrase = (corpus[0] + corpus_param[0] + model[0] 
-                     + model_param[0] + '-' + phrase)
-    
+stored_results = dict()
+
+def get_similarities(corpus, corpus_param, model, model_param, 
+                     phrase, n):
+
+    if (corpus, corpus_param, model, model_param, phrase) in stored_results:
+        print 'Found stored result'
+        result = stored_results[(corpus, corpus_param, model,
+                                 model_param, phrase)]
+    else:
+        model_inst = model_instances[(corpus, corpus_param, 
+                                 model, model_param)]
+        result = model_inst.similar(phrase)
+        stored_results[(corpus, corpus_param, model, model_param, phrase)] = result
+        print stored_results.keys()
+
+    if result[0][0] == phrase:
+        result = result[1:n+1]
+    else:
+        result = result[:n]
+            
     result = {'result': 
-              [{ result_phrase: ((1.0 / len(phrase)) - (i * .01)) } 
-               for i in xrange(n)]}
-    
-    server_lag = random.randint(1,5)
-    print 'Simulated server lag:', server_lag
-    time.sleep(server_lag)
+              [{term: '{0:^.3f}'.format(float(value))} 
+               for (term, value) in result]}
     print 'Result', result
-    
+
     return result
+
 
 # TODO: add concurrency
 
@@ -37,7 +66,8 @@ class IndexHandler(web.RequestHandler):
         phrase = self.get_argument('phrase')
         n = 20
 
-        result = dummy_data(corpus, corpus_param, model, model_param, n)
+        result = get_similarities(corpus, corpus_param, model,
+                                  model_param, phrase, n)
 
         self.write(result)
 
