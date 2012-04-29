@@ -114,6 +114,9 @@ class IndexHandler(web.RequestHandler):
         except PhraseError:
             self.send_error( reason = 'phrase')
 
+        except:
+            self.send_error()
+
 
     def write_error(self, status_code, reason = None, **kwargs):
 
@@ -134,6 +137,6 @@ if __name__ == "__main__":
         
     application = web.Application(handlers)
 
-    application.listen(8088)
+    application.listen(8080)
     ioloop.IOLoop.instance().start()
 
