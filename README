@@ -1,4 +1,7 @@
-This is to develop a web-interface to remotely access term relatedness data over varying corpora and models. The data is retrieved from a JSON object of the generic form below:
+Indiana Philosophy Ontology Project
+Semantics Frontend
+
+The frontend is a web-interface mean to remotely access term relatedness data over varying corpora and models. The data is retrieved from a JSON object of the generic form below:
 
 [{related-term_1:similarity_1},
  {related-term_2:similarity_2},
@@ -7,4 +10,10 @@ This is to develop a web-interface to remotely access term relatedness data over
  {related-term_n:similarity_n}
 ]
 
-Currently, this interface is implemented to run solely on the SEP-BEAGLE lexicon/model; however, the ultimate goal is to generalize this interface to run on any lexicon/model combination. 
+Currently, this interface is implemented to run solely on the SEP-BEAGLE lexicon/model; however, the ultimate goal is to generalize this interface to run on any lexicon/model combination.
+
+
+To view example data, simply initiate a simple server and browse to http://localhost:8080 in your preferred web-browser.
+e.g.:
+$> cd inphosemantics-frontend/
+$> ./tinyserver.py
