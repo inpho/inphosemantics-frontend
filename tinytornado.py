@@ -41,9 +41,7 @@ def get_model(corpus, corpus_param, model, model_param):
     except KeyError:
 
         corpora = [(c, cp) for (c, cp, m, mp) in model_instances.keys()]
-        print 'Corpora', corpora
         models = [(m, mp) for (c, cp, m, mp) in model_instances.keys()]
-        print 'Models', models
 
         if (corpus, corpus_param) not in corpora:
             raise CorpusError(corpus + ' is not available')
