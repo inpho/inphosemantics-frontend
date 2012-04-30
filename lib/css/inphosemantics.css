@@ -4,3 +4,9 @@
     margin-right: auto;
     width: auto;
 }
+
+#selectionModal {
+    display: none;
+    width: auto;
+}
+
