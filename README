@@ -10,9 +10,6 @@ The frontend is a web-interface mean to remotely access term relatedness data ov
  {related-term_n:similarity_n}
 ]
 
-Currently, this interface is implemented to run solely on the SEP-BEAGLE lexicon/model; however, the ultimate goal is to generalize this interface to run on any lexicon/model combination.
-
-
 To view example data, simply initiate a simple server and browse to http://localhost:8080 in your preferred web-browser.
 e.g.:
 $> cd inphosemantics-frontend/
