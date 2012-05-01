@@ -1,3 +1,13 @@
+/* TAG */
+
+/* CLASS */
+/* A gift for later
+table .phrase:nth-of-type(odd) {
+    background-color: #eee;
+}
+*/
+
+/* ID */
 #root {
     display: none;
     margin-left: auto;
