@@ -7,6 +7,18 @@ table .phrase:nth-of-type(odd) {
 }
 */
 
+.container{
+    width: 100%;
+}
+.row {
+    margin-left: 0;
+}
+
+.table td {
+    padding: 0;
+}
+
+
 /* ID */
 #root {
     display: none;
