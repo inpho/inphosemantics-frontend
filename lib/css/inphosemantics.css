@@ -1,11 +1,11 @@
 /* TAG */
 
 /* CLASS */
-/* A gift for later
-table .phrase:nth-of-type(odd) {
+/* A gift for later */
+.odd-nth-phrase{
     background-color: #eee;
 }
-*/
+
 
 .container{
     width: 100%;
@@ -15,6 +15,10 @@ table .phrase:nth-of-type(odd) {
 }
 
 .table td {
+    padding: 0;
+}
+
+.table th {
     padding: 0;
 }
 
