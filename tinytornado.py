@@ -1,25 +1,49 @@
 #!/usr/bin/python
 
+import inphosemantics
 from tornado import ioloop, web
-from inphosemantics import Model
+from inphosemantics import model
+from inphosemantics.model import beagleenvironment
+from inphosemantics.model import beagleorder
+from inphosemantics.model import beaglecontext
+from inphosemantics.model import beaglecomposite
+
+# TODO: Figure out how to actually do this
+data_path = '/var/inphosemantics/data/'
+sep_path  = data_path + 'sep/complete/corpus/sep-complete.pickle.bz2'
+iep_path  = data_path + 'iep/complete/corpus/iep-complete.pickle.bz2'
+sep_complete = inphosemantics.load_picklez(sep_path)
+iep_complete = inphosemantics.load_picklez(iep_path)
+
+beagle_environment = beagleenvironment.BeagleEnvironment()
+beagle_environment.train(sep_complete, n_columns=256)
 
 model_instances = {
     ('sep', 'complete', 'beagle', 'environment'):\
-        Model('sep','complete','beagle','environment'),
+        #Model('sep','complete','beagle','environment'),
+        beagle_environment,
     ('sep', 'complete', 'beagle', 'context'):\
-        Model('sep','complete','beagle','context'),
+        #Model('sep','complete','beagle','context'),
+        0,
     ('sep', 'complete', 'beagle', 'order'):\
-        Model('sep','complete','beagle','order'),
+        #Model('sep','complete','beagle','order'),
+        0,
     ('sep', 'complete', 'beagle', 'composite'):\
-        Model('sep','complete','beagle','composite'),
+        #Model('sep','complete','beagle','composite'),
+        0,
     ('iep', 'complete', 'beagle', 'environment'):\
-        Model('iep','complete','beagle','environment'),
+        #Model('iep','complete','beagle','environment'),
+        0,
     ('iep', 'complete', 'beagle', 'context'):\
-        Model('iep','complete','beagle','context'),
+        #Model('iep','complete','beagle','context'),
+        0,
     ('iep', 'complete', 'beagle', 'order'):\
-        Model('iep','complete','beagle','order'),
+        #Model('iep','complete','beagle','order'),
+        0,
     ('iep', 'complete', 'beagle', 'composite'):\
-        Model('iep','complete','beagle','composite')}
+        #Model('iep','complete','beagle','composite')
+        0,
+    }
     
 stored_results = dict()
 
@@ -95,14 +119,17 @@ class IndexHandler(web.RequestHandler):
 
         corpus = self.get_argument('corpus').split('.')[0]
         corpus_param = self.get_argument('corpus').split('.')[1]
+
         model = self.get_argument('model').split('.')[0]
         model_param = self.get_argument('model').split('.')[1]
+
         phrase = self.get_argument('phrase')
-        n = 20
+
+        count = int(self.get_argument('count'))
 
         try:
             result = get_similarities(corpus, corpus_param, model,
-                                      model_param, phrase, n)
+                                      model_param, phrase, count)
             self.finish(result)
             
         except CorpusError:
@@ -137,6 +164,6 @@ if __name__ == "__main__":
         
     application = web.Application(handlers)
 
-    application.listen(8080)
+    application.listen(9090)
     ioloop.IOLoop.instance().start()
 

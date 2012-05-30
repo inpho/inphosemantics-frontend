@@ -30,15 +30,22 @@ class IndexHandler(web.RequestHandler):
 
     def post(self):
 
+
+        # TODO: try / catch : raise new 400 exception
+        #try:
         corpus = self.get_argument('corpus').split('.')[0]
         corpus_param = self.get_argument('corpus').split('.')[1]
+        
         model = self.get_argument('model').split('.')[0]
         model_param = self.get_argument('model').split('.')[1]
+        
         phrase = self.get_argument('phrase')
-        n = 20
+
+        # TODO: handle if not int : raise exception
+        count = int(self.get_argument('count'))
 
         result = dummy_data(corpus, corpus_param, model, 
-                            model_param, phrase, n)
+                            model_param, phrase, count)
 
         self.write(result)
 
@@ -51,6 +58,6 @@ if __name__ == "__main__":
         
     application = web.Application(handlers)
 
-    application.listen(8088)
+    application.listen(9090)
     ioloop.IOLoop.instance().start()
 
