@@ -1,49 +1,27 @@
 #!/usr/bin/python
 
 import inphosemantics
+from inphosemantics import inpho
 from tornado import ioloop, web
-from inphosemantics import model
-from inphosemantics.model import beagleenvironment
-from inphosemantics.model import beagleorder
-from inphosemantics.model import beaglecontext
-from inphosemantics.model import beaglecomposite
 
-# TODO: Figure out how to actually do this
-data_path = '/var/inphosemantics/data/'
-sep_path  = data_path + 'sep/complete/corpus/sep-complete.pickle.bz2'
-iep_path  = data_path + 'iep/complete/corpus/iep-complete.pickle.bz2'
-sep_complete = inphosemantics.load_picklez(sep_path)
-iep_complete = inphosemantics.load_picklez(iep_path)
-
-beagle_environment = beagleenvironment.BeagleEnvironment()
-beagle_environment.train(sep_complete, n_columns=256)
 
 model_instances = {
-    ('sep', 'complete', 'beagle', 'environment'):\
-        #Model('sep','complete','beagle','environment'),
-        beagle_environment,
+    ('sep', 'complete', 'beagle', 'environment'):
+        inpho.InphoViewer('sep', 'complete', 'beagleenvironment'),
     ('sep', 'complete', 'beagle', 'context'):\
-        #Model('sep','complete','beagle','context'),
-        0,
+        inpho.InphoViewer('sep', 'complete', 'beaglecontext'),
     ('sep', 'complete', 'beagle', 'order'):\
-        #Model('sep','complete','beagle','order'),
-        0,
+        inpho.InphoViewer('sep', 'complete', 'beagleorder'),
     ('sep', 'complete', 'beagle', 'composite'):\
-        #Model('sep','complete','beagle','composite'),
-        0,
+        inpho.InphoViewer('sep', 'complete', 'beaglecomposite'),
     ('iep', 'complete', 'beagle', 'environment'):\
-        #Model('iep','complete','beagle','environment'),
-        0,
+        0, # inpho.InphoViewer('iep', 'complete', 'beagleenvironment'),
     ('iep', 'complete', 'beagle', 'context'):\
-        #Model('iep','complete','beagle','context'),
-        0,
+        0, # inpho.InphoViewer('iep', 'complete', 'beaglecontext'),
     ('iep', 'complete', 'beagle', 'order'):\
-        #Model('iep','complete','beagle','order'),
-        0,
+        0, # inpho.InphoViewer('iep', 'complete', 'beagleorder'),
     ('iep', 'complete', 'beagle', 'composite'):\
-        #Model('iep','complete','beagle','composite')
-        0,
-    }
+        0 } #inpho.InphoViewer('iep', 'complete', 'beaglecomposite')}
     
 stored_results = dict()
 
@@ -87,7 +65,7 @@ def get_similarities(corpus, corpus_param, model, model_param,
         model_inst = get_model(corpus, corpus_param, 
                                model, model_param)
         try:
-            result = model_inst.similar(phrase)
+            result = model_inst.similar_terms(phrase, True)
         except:
             raise PhraseError('No word in ' + phrase + ' appears in corpus')
 
