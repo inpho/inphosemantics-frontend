@@ -103,11 +103,11 @@ class IndexHandler(web.RequestHandler):
 
         phrase = self.get_argument('phrase')
 
-        count = int(self.get_argument('count'))
+        searchLimit = int(self.get_argument('searchLimit'))
 
         try:
             result = get_similarities(corpus, corpus_param, model,
-                                      model_param, phrase, count)
+                                      model_param, phrase, searchLimit)
             self.finish(result)
             
         except CorpusError:
@@ -119,6 +119,9 @@ class IndexHandler(web.RequestHandler):
         except PhraseError:
             self.send_error( reason = 'phrase')
 
+        except LimitError:
+            self.send_error( reason = 'limit')
+            
         except:
             self.send_error()
 
@@ -131,6 +134,8 @@ class IndexHandler(web.RequestHandler):
             self.finish('Model not available')
         elif reason == 'phrase':
             self.finish('Phrase not available')
+        elif reason == 'limit':
+            self.finish('Something is wrong with the limit.')
         else:
             self.finish('Uncaught error')
 
