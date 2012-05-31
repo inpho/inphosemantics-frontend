@@ -17,11 +17,18 @@
 	   "short label": ""}},
 	 {"beagle.composite":
 	  {"long label": "BEAGLE: Composite Vectors",
-	   "short label": ""}}]}},
-      {"sep.philmind":
-       {"long label": "Stanford Encyclopedia of Philosophy: Philosophy of Mind",
-	"short label": "SEP: Phil Mind",
-	"models":
+	   "short label": ""}},
+         {"tf":
+          {"long label": "Term Frequency",
+           "short label": "tf"}},
+         {"tfidf":
+          {"long label": "Term Frequency Inverse Document Frequency",
+           "short label": "tfidf"}}]
+           }},
+      {"philpapers.complete":
+       {"long label": "PhilPapers: Complete",
+        "short label": "PhilPapers",
+        "models":
 	[{"beagle.environment":
 	  {"long label": "BEAGLE: Environment Vectors", 
 	   "short label": ""}},
@@ -33,7 +40,37 @@
 	   "short label": ""}},
 	 {"beagle.composite":
 	  {"long label": "BEAGLE: Composite Vectors",
-	   "short label": ""}}]}},
+	   "short label": ""}},
+         {"tf":
+          {"long label": "Term Frequency",
+           "short label": "tf"}},
+         {"tfidf":
+          {"long label": "Term Frequency Inverse Document Frequency",
+           "short label": "tfidf"}}]
+           }},
+      {"malaria.complete":
+       {"long label": "Malaria: Complete",
+        "short label": "Malaria",
+        "models":
+	[{"beagle.environment":
+	  {"long label": "BEAGLE: Environment Vectors", 
+	   "short label": ""}},
+	 {"beagle.context":
+	  {"long label": "BEAGLE: Context Vectors",
+	   "short label": ""}},
+	 {"beagle.order":
+	  {"long label": "BEAGLE: Order Vectors",
+	   "short label": ""}},
+	 {"beagle.composite":
+	  {"long label": "BEAGLE: Composite Vectors",
+	   "short label": ""}},
+         {"tf":
+          {"long label": "Term Frequency",
+           "short label": "tf"}},
+         {"tfidf":
+          {"long label": "Term Frequency Inverse Document Frequency",
+           "short label": "tfidf"}}]
+           }},
       {"iep.complete":
        {"long label": "Internet Encyclopedia of Philosophy: Complete",
 	"short label": "IEP",
@@ -49,5 +86,12 @@
 	   "short label": ""}},
 	 {"beagle.composite":
 	  {"long label": "BEAGLE: Composite Vectors",
-	   "short label": ""}}]}}]}
+	   "short label": ""}},
+         {"tf":
+          {"long label": "Term Frequency",
+           "short label": "tf"}},
+         {"tfidf":
+          {"long label": "Term Frequency Inverse Document Frequency",
+           "short label": "tfidf"}}]
+           }}]}
   ]}}

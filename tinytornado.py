@@ -13,6 +13,12 @@ model_instances = {
         inpho.InphoViewer('sep', 'complete', 'beagleorder'),
     ('sep', 'complete', 'beagle', 'composite'):\
         inpho.InphoViewer('sep', 'complete', 'beaglecomposite'),
+    ('sep', 'complete', 'tf', ''):
+        inpho.InphoViewer('sep', 'complete', 'tf'),
+    ('sep', 'complete', 'tfidf', ''):
+        inpho.InphoViewer('sep', 'complete', 'tf'),
+
+
     ('iep', 'complete', 'beagle', 'environment'):
         inpho.InphoViewer('iep', 'complete', 'beagleenvironment'),
     ('iep', 'complete', 'beagle', 'context'):
@@ -20,7 +26,37 @@ model_instances = {
     ('iep', 'complete', 'beagle', 'order'):
         inpho.InphoViewer('iep', 'complete', 'beagleorder'),
     ('iep', 'complete', 'beagle', 'composite'):
-        inpho.InphoViewer('iep', 'complete', 'beaglecomposite')
+        inpho.InphoViewer('iep', 'complete', 'beaglecomposite'),
+    ('iep', 'complete', 'tf', 'composite'):
+        inpho.InphoViewer('iep', 'complete', 'tf'),
+    ('iep', 'complete', 'tfidf', ''):
+        inpho.InphoViewer('iep', 'complete', 'tfidf'),
+    
+    ('malaria', 'complete', 'beagle', 'environment'):
+        inpho.InphoViewer('malaria', 'complete', 'beagleenvironment'),
+    ('malaria', 'complete', 'beagle', 'context'):
+        inpho.InphoViewer('malaria', 'complete', 'beaglecontext'),
+    ('malaria', 'complete', 'beagle', 'order'):
+        inpho.InphoViewer('malaria', 'complete', 'beagleorder'),
+    ('malaria', 'complete', 'beagle', 'composite'):
+        inpho.InphoViewer('malaria', 'complete', 'beaglecomposite'),
+    ('malaria', 'complete', 'tf', ''):
+        inpho.InphoViewer('malaria', 'complete', 'tf'),
+    ('malaria', 'complete', 'tfidf', ''):
+        inpho.InphoViewer('malaria', 'complete', 'tfidf'),
+    
+    ('philpapers', 'complete', 'beagle', 'environment'):
+        inpho.InphoViewer('malaria', 'complete', 'beagleenvironment'),
+    ('philpapers', 'complete', 'beagle', 'context'):
+        inpho.InphoViewer('malaria', 'complete', 'beaglecontext'),
+    ('philpapers', 'complete', 'beagle', 'order'):
+        inpho.InphoViewer('malaria', 'complete', 'beagleorder'),
+    ('philpapers', 'complete', 'beagle', 'composite'):
+        inpho.InphoViewer('malaria', 'complete', 'beaglecomposite'),
+    ('philpapers', 'complete', 'tf', ''):
+        inpho.InphoViewer('malaria', 'complete', 'tf'),
+    ('philpapers', 'complete', 'tfidf', ''):
+        inpho.InphoViewer('malaria', 'complete', 'tfidf')
     }
     
 stored_results = dict()
