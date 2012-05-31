@@ -87,13 +87,9 @@ def get_similarities(corpus, corpus_param, model, model_param,
     return result
 
 
-
-class IndexHandler(web.RequestHandler):
-
+class DataHandler(web.RequestHandler):
+    
     def get(self):
-        self.render('index.html')
-
-    def post(self):
 
         corpus = self.get_argument('corpus').split('.')[0]
         corpus_param = self.get_argument('corpus').split('.')[1]
@@ -126,6 +122,13 @@ class IndexHandler(web.RequestHandler):
             self.send_error()
 
 
+
+class IndexHandler(web.RequestHandler):
+
+    def get(self):
+        self.render('index.html')
+        
+
     def write_error(self, status_code, reason = None, **kwargs):
 
         if reason == 'corpus':
@@ -143,6 +146,7 @@ class IndexHandler(web.RequestHandler):
 if __name__ == "__main__":
 
     handlers = [(r'/', IndexHandler),
+                (r'/data', DataHandler),
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)
