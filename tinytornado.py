@@ -4,7 +4,6 @@ import inphosemantics
 from inphosemantics import inpho
 from tornado import ioloop, web
 
-
 model_instances = {
     ('sep', 'complete', 'beagle', 'environment'):
         inpho.InphoViewer('sep', 'complete', 'beagleenvironment'),
@@ -14,14 +13,15 @@ model_instances = {
         inpho.InphoViewer('sep', 'complete', 'beagleorder'),
     ('sep', 'complete', 'beagle', 'composite'):\
         inpho.InphoViewer('sep', 'complete', 'beaglecomposite'),
-    ('iep', 'complete', 'beagle', 'environment'):\
-        0, # inpho.InphoViewer('iep', 'complete', 'beagleenvironment'),
-    ('iep', 'complete', 'beagle', 'context'):\
-        0, # inpho.InphoViewer('iep', 'complete', 'beaglecontext'),
-    ('iep', 'complete', 'beagle', 'order'):\
-        0, # inpho.InphoViewer('iep', 'complete', 'beagleorder'),
-    ('iep', 'complete', 'beagle', 'composite'):\
-        0 } #inpho.InphoViewer('iep', 'complete', 'beaglecomposite')}
+    ('iep', 'complete', 'beagle', 'environment'):
+        inpho.InphoViewer('iep', 'complete', 'beagleenvironment'),
+    ('iep', 'complete', 'beagle', 'context'):
+        inpho.InphoViewer('iep', 'complete', 'beaglecontext'),
+    ('iep', 'complete', 'beagle', 'order'):
+        inpho.InphoViewer('iep', 'complete', 'beagleorder'),
+    ('iep', 'complete', 'beagle', 'composite'):
+        inpho.InphoViewer('iep', 'complete', 'beaglecomposite')
+    }
     
 stored_results = dict()
 
