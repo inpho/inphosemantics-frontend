@@ -157,14 +157,6 @@ class DataHandler(web.RequestHandler):
         except:
             self.send_error()
 
-
-
-class IndexHandler(web.RequestHandler):
-
-    def get(self):
-        self.render('index.html')
-        
-
     def write_error(self, status_code, reason = None, **kwargs):
 
         if reason == 'corpus':
@@ -177,6 +169,13 @@ class IndexHandler(web.RequestHandler):
             self.finish('Something is wrong with the limit.')
         else:
             self.finish('Uncaught error')
+
+
+class IndexHandler(web.RequestHandler):
+
+    def get(self):
+        self.render('index.html')
+        
 
 
 if __name__ == "__main__":
