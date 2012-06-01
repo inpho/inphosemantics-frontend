@@ -1,7 +1,9 @@
+import json
 import os.path
-from tornado import ioloop, web
-import time
 import random
+import time
+
+from tornado import ioloop, web
 
 def dummy_data(corpus, corpus_param, model, model_param, phrase, n):
     
@@ -38,7 +40,8 @@ class DataHandler(web.RequestHandler):
         result = dummy_data(corpus, corpus_param, model, 
                             model_param, phrase, count)
 
-        self.write(result)
+        self.write(json.dumps(result))
+        self.set_header("Content-Type", "application/json; charset=UTF-8")
 
 
 class IndexHandler(web.RequestHandler):
