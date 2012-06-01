@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import os.path
 from tornado import ioloop, web
 import time
@@ -23,14 +21,8 @@ def dummy_data(corpus, corpus_param, model, model_param, phrase, n):
 
 # TODO: add concurrency
 
-class IndexHandler(web.RequestHandler):
-
+class DataHandler(web.RequestHandler):
     def get(self):
-        self.render('index.html')
-
-    def post(self):
-
-
         # TODO: try / catch : raise new 400 exception
         #try:
         corpus = self.get_argument('corpus').split('.')[0]
@@ -42,7 +34,7 @@ class IndexHandler(web.RequestHandler):
         phrase = self.get_argument('phrase')
 
         # TODO: handle if not int : raise exception
-        count = int(self.get_argument('count'))
+        count = int(self.get_argument('searchLimit'))
 
         result = dummy_data(corpus, corpus_param, model, 
                             model_param, phrase, count)
@@ -50,10 +42,15 @@ class IndexHandler(web.RequestHandler):
         self.write(result)
 
 
+class IndexHandler(web.RequestHandler):
+
+    def get(self):
+        self.render('index.html')
 
 if __name__ == "__main__":
 
     handlers = [(r'/', IndexHandler),
+                (r'/data', DataHandler),
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)
