@@ -90,12 +90,7 @@
 <script src="/lib/js/Hash.js"></script>
 <script src="/lib/js/inphosemantics.js"></script>
 <script>
-inpho.semantics.build_table(
-  $('#content'), 
-  { 'corpus' : 'sep.complete', 
-    'model' : 'beagle.environment',
-    'phrase' : 'hume',
-    'searchLimit' : 20 });
+inpho.semantics.load($('#content'));
 </script>
 </body>
 </html>
