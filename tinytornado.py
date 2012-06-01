@@ -117,9 +117,8 @@ def get_similarities(corpus, corpus_param, model, model_param,
     else:
         result = result[:n]
             
-    result = {'result': 
-              [{term: '{0:^.3f}'.format(float(value))} 
-               for (term, value) in result]}
+    result = [{term: '{0:^.3f}'.format(float(value))} 
+                 for (term, value) in result]
     print 'Result', result
 
     return result

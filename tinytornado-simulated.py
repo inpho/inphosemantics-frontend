@@ -8,9 +8,8 @@ def dummy_data(corpus, corpus_param, model, model_param, phrase, n):
     result_phrase = (corpus[0] + corpus_param[0] + model[0] 
                      + model_param[0] + '-' + phrase)
     
-    result = {'result': 
-              [{ result_phrase: ((1.0 / len(phrase)) - (i * .01)) } 
-               for i in xrange(n)]}
+    result = [{result_phrase: ((1.0 / len(phrase)) - (i * .01)) } 
+                 for i in xrange(n)]
     
     server_lag = random.randint(1,5)
     print 'Simulated server lag:', server_lag
