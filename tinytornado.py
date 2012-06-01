@@ -4,6 +4,9 @@ import inphosemantics
 from inphosemantics import inpho
 from tornado import ioloop, web
 
+
+model_instance = dict()
+
 model_instances = {
     ('sep', 'complete', 'beagle', 'environment'):
         inpho.InphoViewer('sep', 'complete', 'beagleenvironment'),
@@ -18,7 +21,6 @@ model_instances = {
     ('sep', 'complete', 'tfidf', ''):
         inpho.InphoViewer('sep', 'complete', 'tf'),
 
-
     ('iep', 'complete', 'beagle', 'environment'):
         inpho.InphoViewer('iep', 'complete', 'beagleenvironment'),
     ('iep', 'complete', 'beagle', 'context'):
@@ -27,7 +29,7 @@ model_instances = {
         inpho.InphoViewer('iep', 'complete', 'beagleorder'),
     ('iep', 'complete', 'beagle', 'composite'):
         inpho.InphoViewer('iep', 'complete', 'beaglecomposite'),
-    ('iep', 'complete', 'tf', 'composite'):
+    ('iep', 'complete', 'tf', ''):
         inpho.InphoViewer('iep', 'complete', 'tf'),
     ('iep', 'complete', 'tfidf', ''):
         inpho.InphoViewer('iep', 'complete', 'tfidf'),
@@ -130,8 +132,9 @@ class DataHandler(web.RequestHandler):
         corpus = self.get_argument('corpus').split('.')[0]
         corpus_param = self.get_argument('corpus').split('.')[1]
 
-        model = self.get_argument('model').split('.')[0]
-        model_param = self.get_argument('model').split('.')[1]
+        model_arg = self.get_argument('model').split('.')
+        model = model_arg[0]
+        model_param = model_arg[1] if len(model_arg) == 2 else ""
 
         phrase = self.get_argument('phrase')
 
@@ -166,7 +169,7 @@ class DataHandler(web.RequestHandler):
         elif reason == 'phrase':
             self.finish('Phrase not available')
         elif reason == 'limit':
-            self.finish('Something is wrong with the limit.')
+            self.finish('Search result limit problematic.')
         else:
             self.finish('Uncaught error')
 
