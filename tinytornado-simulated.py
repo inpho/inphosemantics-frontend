@@ -15,9 +15,9 @@ def dummy_data(corpus, corpus_param, model, model_param, phrase, n):
     result = [{result_phrase: ((1.0 / len(phrase)) - (i * .01)) } 
                  for i in xrange(n)]
     
-    server_lag = random.randint(1,5)
-    print 'Simulated server lag:', server_lag
-    time.sleep(server_lag)
+    # server_lag = random.randint(1,5)
+    # print 'Simulated server lag:', server_lag
+    # time.sleep(server_lag)
     print 'Result', result
     
     return result
