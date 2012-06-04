@@ -5,6 +5,11 @@
     background-color: #eee;
 }
 
+.queryResult {
+    border: solid thin black;
+    float: left;
+}
+
 .remove {
     float: none;
     vertical-align: text-bottom;
