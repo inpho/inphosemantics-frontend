@@ -5,6 +5,7 @@ import os.path
 import random
 import time
 
+from mako.template import Template
 from tornado import ioloop, web
 
 def dummy_data(corpus, corpus_param, model, model_param, phrase, n):
@@ -49,7 +50,9 @@ class DataHandler(web.RequestHandler):
 class IndexHandler(web.RequestHandler):
 
     def get(self):
-        self.render('index.html')
+        template = Template(filename='templates/index.html')
+        self.write(template.render())
+        #self.render('index.html')
 
 if __name__ == "__main__":
 
