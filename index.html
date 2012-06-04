@@ -43,41 +43,28 @@
 
   <div class="modal-body">
 
-    <!-- Add Corpus Form -->
-    <form class="form-inline">
-      <select class="span4" id="corporaSelect">
-      </select>
+    <form class="form-horizontal">
+      <!-- Add Corpus -->
+      <select class="span5" id="corporaSelect"></select>
       <button id="corporaSubmit" type="submit" class="btn">Add Corpus</button>
-    </form>
-    <ul class="unstyled" id="currentCorpora">
-    </ul>
+      <ul class="unstyled" id="currentCorpora"></ul>
+      <hr />
 
-    <hr />
-
-    <!-- Add Model Form -->
-    <form class="form-inline">
-      <select class="span4" id="modelsSelect">
-      </select>
+      <!-- Add Model -->
+      <select class="span5" id="modelsSelect"></select>
       <button id="modelsSubmit" type="submit" class="btn">Add Model</button>
-    </form>
-    <ul class="unstyled" id="currentModels">
-    </ul>
+      <ul class="unstyled" id="currentModels"></ul>
+      <hr />
+      
+      <!-- Add Phrase -->
+      <input id="searchTerm" type="text" class="search-query span5" placeholder="Add a search phrase...">
+      <ul class="unstyled" id="currentPhrases"></ul>
+      <hr />
 
-    <hr />
-
-    <!-- Add Phrase Form -->
-    <form class="form-search" id="search">
-      <input id="searchTerm" type="text" class="search-query span4" placeholder="Add a search phrase...">
-    </form>
-    <ul class="unstyled" id="currentPhrases">
-    </ul>
-
-    <hr />
-
-    <!-- Set Search Limit Form -->
-    <form class="form-inline" id="searchLimit">
+      <!-- Search Limit -->
       Set number of results to be returned: <input class="span1" id="limit" type="text">
       <button class="btn">Set</button>
+
     </form>
 
   </div> <!-- modal-body -->
