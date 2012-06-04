@@ -1,15 +1,19 @@
 /* TAG */
 
 /* CLASS */
-/* A gift for later */
 .odd-nth-phrase{
     background-color: #eee;
 }
 
+.remove {
+    float: none;
+    vertical-align: text-bottom;
+}
 
 .container{
     width: 100%;
 }
+
 .row {
     margin-left: 0;
 }
@@ -33,6 +37,7 @@
 
 #selectionModal {
     display: none;
+    overflow-y: scroll;
     width: auto;
 }
 
