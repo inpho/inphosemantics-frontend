@@ -1,3 +1,4 @@
+##<%namespace name="bootstrap" file="/bootstrap-form.html" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,12 +44,13 @@
 
   <div class="modal-body">
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" id="modalForm">
       <!-- Add Corpus -->
       <select class="span5" id="corporaSelect"></select>
       <button id="corporaSubmit" type="submit" class="btn">Add Corpus</button>
       <ul class="unstyled" id="currentCorpora"></ul>
       <hr />
+
 
       <!-- Add Model -->
       <select class="span5" id="modelsSelect"></select>
@@ -86,7 +88,6 @@
 <script src="/lib/js/jquery.js"></script>
 <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-modal.js"></script>
 <script src="/lib/js/bootstrap.js"></script>
-<script src="/lib/js/Hash.js"></script>
 <script src="/lib/js/inphosemantics.js"></script>
 <script>
 inpho.semantics.load($('#content'));

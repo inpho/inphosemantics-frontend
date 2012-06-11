@@ -1,7 +1,9 @@
 #!/usr/bin/python
+import json
 
 import inphosemantics
 from inphosemantics import inpho
+
 from tornado import ioloop, web
 
 
@@ -117,9 +119,8 @@ def get_similarities(corpus, corpus_param, model, model_param,
     else:
         result = result[:n]
             
-    result = {'result': 
-              [{term: '{0:^.3f}'.format(float(value))} 
-               for (term, value) in result]}
+    result = [{term: '{0:^.3f}'.format(float(value))} 
+                 for (term, value) in result]
     print 'Result', result
 
     return result
@@ -143,7 +144,8 @@ class DataHandler(web.RequestHandler):
         try:
             result = get_similarities(corpus, corpus_param, model,
                                       model_param, phrase, searchLimit)
-            self.finish(result)
+            self.write(json.dumps(result))
+            self.set_header("Content-Type", "application/json; charset=UTF-8")
             
         except CorpusError:
             self.send_error( reason = 'corpus')

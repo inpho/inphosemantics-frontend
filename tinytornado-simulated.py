@@ -1,20 +1,24 @@
+#!/usr/bin/python
+
+import json
 import os.path
-from tornado import ioloop, web
-import time
 import random
+import time
+
+from mako.template import Template
+from tornado import ioloop, web
 
 def dummy_data(corpus, corpus_param, model, model_param, phrase, n):
     
     result_phrase = (corpus[0] + corpus_param[0] + model[0] 
                      + model_param[0] + '-' + phrase)
     
-    result = {'result': 
-              [{ result_phrase: ((1.0 / len(phrase)) - (i * .01)) } 
-               for i in xrange(n)]}
+    result = [{result_phrase: ((1.0 / len(phrase)) - (i * .01)) } 
+                 for i in xrange(n)]
     
-    server_lag = random.randint(1,5)
-    print 'Simulated server lag:', server_lag
-    time.sleep(server_lag)
+    # server_lag = random.randint(1,5)
+    # print 'Simulated server lag:', server_lag
+    # time.sleep(server_lag)
     print 'Result', result
     
     return result
@@ -39,12 +43,15 @@ class DataHandler(web.RequestHandler):
         result = dummy_data(corpus, corpus_param, model, 
                             model_param, phrase, count)
 
-        self.write(result)
+        self.write(json.dumps(result))
+        self.set_header("Content-Type", "application/json; charset=UTF-8")
 
 
 class IndexHandler(web.RequestHandler):
 
     def get(self):
+        #template = Template(filename='templates/index.html')
+        #self.write(template.render())
         self.render('index.html')
 
 if __name__ == "__main__":
@@ -54,7 +61,8 @@ if __name__ == "__main__":
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)
-
-    application.listen(9090)
+    port = 8080
+    application.listen(port)
+    print "server listening on port", port
     ioloop.IOLoop.instance().start()
 
