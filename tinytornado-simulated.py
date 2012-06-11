@@ -50,9 +50,9 @@ class DataHandler(web.RequestHandler):
 class IndexHandler(web.RequestHandler):
 
     def get(self):
-        template = Template(filename='templates/index.html')
-        self.write(template.render())
-        #self.render('index.html')
+        #template = Template(filename='templates/index.html')
+        #self.write(template.render())
+        self.render('index.html')
 
 if __name__ == "__main__":
 
@@ -61,7 +61,8 @@ if __name__ == "__main__":
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)
-
-    application.listen(9090)
+    port = 8080
+    application.listen(port)
+    print "server listening on port", port
     ioloop.IOLoop.instance().start()
 
