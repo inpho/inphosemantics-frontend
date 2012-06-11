@@ -48,19 +48,19 @@ model_instances = {
         inpho.InphoViewer('malaria', 'complete', 'tfidf'),
     
     ('philpapers', 'complete', 'beagle', 'environment'):
-        inpho.InphoViewer('malaria', 'complete', 'beagleenvironment'),
+        inpho.InphoViewer('philpapers', 'complete', 'beagleenvironment'),
     ('philpapers', 'complete', 'beagle', 'context'):
-        inpho.InphoViewer('malaria', 'complete', 'beaglecontext'),
+        inpho.InphoViewer('philpapers', 'complete', 'beaglecontext'),
     ('philpapers', 'complete', 'beagle', 'order'):
-        inpho.InphoViewer('malaria', 'complete', 'beagleorder'),
+        inpho.InphoViewer('philpapers', 'complete', 'beagleorder'),
     ('philpapers', 'complete', 'beagle', 'composite'):
-        inpho.InphoViewer('malaria', 'complete', 'beaglecomposite'),
+        inpho.InphoViewer('philpapers', 'complete', 'beaglecomposite'),
     ('philpapers', 'complete', 'tf', ''):
-        inpho.InphoViewer('malaria', 'complete', 'tf'),
+        inpho.InphoViewer('philpapers', 'complete', 'tf'),
     ('philpapers', 'complete', 'tfidf', ''):
-        inpho.InphoViewer('malaria', 'complete', 'tfidf')
+        inpho.InphoViewer('philpapers', 'complete', 'tfidf')
     }
-    
+ B1;2403;0c   
 stored_results = dict()
 
 class CorpusError(Exception):
