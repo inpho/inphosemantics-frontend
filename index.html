@@ -43,22 +43,23 @@
 
   <div class="modal-body">
 
-    <form class="form-horizontal">
+    <form id="formSearch" class="form-horizontal" >
+
       <!-- Add Corpus -->
-      <select class="span5" id="corporaSelect"></select>
-      <button id="corporaSubmit" type="submit" class="btn">Add Corpus</button>
-      <ul class="unstyled" id="currentCorpora"></ul>
+      <ul class="unstyled" id="ulCorpora"></ul>
+      <select class="span5" id="selectCorpora"></select>
+      <button id="btnCorpora" type="submit" class="btn">Add Corpus</button>
       <hr />
 
       <!-- Add Model -->
-      <select class="span5" id="modelsSelect"></select>
-      <button id="modelsSubmit" type="submit" class="btn">Add Model</button>
-      <ul class="unstyled" id="currentModels"></ul>
+      <ul class="unstyled" id="ulModels"></ul>
+      <select class="span5" id="selectModels"></select>
+      <button id="btnModels" type="submit" class="btn">Add Model</button>
       <hr />
       
       <!-- Add Phrase -->
-      <input id="searchTerm" type="text" class="search-query span5" placeholder="Add a search phrase...">
-      <ul class="unstyled" id="currentPhrases"></ul>
+      <ul class="unstyled" id="ulPhrases"></ul>
+      <input id="inputTerm" type="text" class="search-query span5" placeholder="Add a search phrase..." />
       <hr />
 
       <!-- Search Limit -->
@@ -86,7 +87,6 @@
 <script src="/lib/js/jquery.js"></script>
 <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-modal.js"></script>
 <script src="/lib/js/bootstrap.js"></script>
-<script src="/lib/js/Hash.js"></script>
 <script src="/lib/js/inphosemantics.js"></script>
 <script>
 inpho.semantics.load($('#content'));
