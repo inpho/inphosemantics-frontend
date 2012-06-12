@@ -1,6 +1,10 @@
 /* TAG */
 
 /* CLASS */
+.modal-body {
+    overflow-y: scroll;
+}
+
 .odd-nth-phrase{
     background-color: #eee;
 }
@@ -46,7 +50,6 @@
 
 #selectionModal {
     display: none;
-    overflow-y: scroll;
     width: auto;
 }
 
