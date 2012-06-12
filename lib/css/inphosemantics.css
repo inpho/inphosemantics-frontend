@@ -8,6 +8,10 @@
 .queryResult {
     border: solid thin black;
     float: left;
+    margin: 4px;
+    padding: 4px;
+    text-align: right;
+    width: 200px;
 }
 
 .remove-X {
