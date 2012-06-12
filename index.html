@@ -36,6 +36,7 @@
 
 <!-- Begin "Make Selections" modal -->
 <div class="modal" id="selectionModal">
+  <form id="formSearch" class="form-horizontal" action="/" method="GET">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
     <h3>Make Selections</h3>
@@ -43,40 +44,48 @@
 
   <div class="modal-body">
 
-    <form id="formSearch" class="form-horizontal" >
 
       <!-- Add Corpus -->
-      <ul class="unstyled" id="ulCorpora"></ul>
-      <select class="span5" id="selectCorpora"></select>
-      <button id="btnCorpora" type="submit" class="btn">Add Corpus</button>
-      <input id="inputHiddenCorpora" type="hidden" name="corpora" />
+      <div class="group" id="corpora">
+        <ul class="unstyled"></ul>
+        <select class="span5"></select>
+        <button type="button" class="btn">Add Corpus</button>
+        <input type="hidden" name="corpora" />
+      </div>
       <hr />
 
       <!-- Add Model -->
-      <ul class="unstyled" id="ulModels"></ul>
-      <select class="span5" id="selectModels"></select>
-      <button id="btnModels" type="submit" class="btn">Add Model</button>
-      <input id="inputHiddenModels" type="hidden" name="models" />
+      <div class="group" id="models">
+        <ul class="unstyled"></ul>
+        <select class="span5"></select>
+        <button type="button" class="btn">Add Model</button>
+        <input type="hidden" name="models" />
+      </div>
       <hr />
       
       <!-- Add Phrase -->
-      <ul class="unstyled" id="ulPhrases"></ul>
-      <input id="inputTerm" type="text" class="search-query span5" placeholder="Add a search phrase..." />
-      <input id="inputHiddenPhrases" type="hidden" name="phrases" />
+      <div class="group" id="phrases">
+        <ul class="unstyled"></ul>
+        <input type="text" class="search-query span5" placeholder="Add a search phrase..." />
+        <input type="hidden" name="phrases" />
+      </div>
       <hr />
 
       <!-- Search Limit -->
-      Set number of results to be returned: <input class="span1" id="limit" type="text">
-      <button class="btn">Set</button>
+      <div class="group" id="limit">
+        Number of results to be returned: 
+        <input id="searchLimit" class="span1" name="searchLimit" type="text">
+      </div>
 
-    </form>
 
   </div> <!-- modal-body -->
 
   <div class="modal-footer">
-    <button class="btn btn-primary" id="querySubmit">Submit Query</button>
     <button class="btn" id="queryReset">Reset</button>
+    <button class="btn btn-primary" type="submit">Submit Query</button>
   </div> <!-- modal-footer -->
+
+</form>
 
 </div>
 <!-- End "Make Selections" modal -->
