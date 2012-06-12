@@ -23,9 +23,16 @@
     white-space: nowrap;
 }
 
-.queryResult table{
-    text-align: right;
+.queryResult th{
+    border-bottom: solid thin black;
+    text-align: left;
 }
+
+.queryResult td{
+    text-align: left;
+    width: 100px;
+}
+
 .remove-X {
     float: none;
     vertical-align: text-bottom;
@@ -39,13 +46,16 @@
     margin-left: 0;
 }
 
+/* Bootstrappy thing */
+/* Used to remove lots of extra whitespace. */
 .table td {
     padding: 0;
 }
-
 .table th {
     padding: 0;
 }
+
+
 
 
 /* ID */
