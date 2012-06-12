@@ -1,6 +1,9 @@
 /* TAG */
 
 /* CLASS */
+.topBorder {
+    border-top: solid thin black;
+}
 .modal-body {
     overflow-y: scroll;
 }
@@ -13,11 +16,16 @@
     border: solid thin black;
     float: left;
     margin: 4px;
+    max-height: 475px;
+    min-width: 220px;
+    overflow-y: auto;
     padding: 4px;
-    text-align: right;
-    width: 200px;
+    white-space: nowrap;
 }
 
+.queryResult table{
+    text-align: right;
+}
 .remove-X {
     float: none;
     vertical-align: text-bottom;
