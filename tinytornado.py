@@ -60,7 +60,7 @@ model_instances = {
     ('philpapers', 'complete', 'tfidf', ''):
         inpho.InphoViewer('philpapers', 'complete', 'tfidf')
     }
- B1;2403;0c   
+
 stored_results = dict()
 
 class CorpusError(Exception):
