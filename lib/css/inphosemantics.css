@@ -16,7 +16,20 @@
     border: solid thin black;
     float: left;
     margin: 4px;
-    max-height: 475px;
+    max-height: 486px;
+    min-width: 220px;
+    overflow-y: auto;
+    padding: 4px;
+    white-space: nowrap;
+}
+
+.queryResultFailure {
+    border: solid thin black;
+    float: left;
+    margin: 4px;
+
+    min-height: 108px;
+    max-height: 234px;
     min-width: 220px;
     overflow-y: auto;
     padding: 4px;
