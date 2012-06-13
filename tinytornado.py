@@ -57,12 +57,12 @@ model_instances = {
         inpho.InphoViewer('philpapers', 'complete', 'beagleorder'),
     ('philpapers', 'complete', 'beagle', 'composite'):
         inpho.InphoViewer('philpapers', 'complete', 'beaglecomposite'),
-    ('philpapers', 'complete', 'tf', ''):
-        inpho.InphoViewer('philpapers', 'complete', 'tf'),
-    ('philpapers', 'complete', 'tfidf', ''):
-        inpho.InphoViewer('philpapers', 'complete', 'tfidf')
+#    ('philpapers', 'complete', 'tf', ''):
+#        inpho.InphoViewer('philpapers', 'complete', 'tf'),
+#    ('philpapers', 'complete', 'tfidf', ''):
+#        inpho.InphoViewer('philpapers', 'complete', 'tfidf')
     }
- B1;2403;0c   
+
 stored_results = dict()
 
 class CorpusError(Exception):
