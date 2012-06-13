@@ -9,9 +9,9 @@ import time
 from tornado import ioloop, web
 
 def dummy_data(corpus, corpus_param, model, model_param, phrase, n):
-    
-    result_phrase = (corpus[0] + corpus_param[0] + model[0] 
-                     + model_param[0] + '-' + phrase)
+
+    result_phrase = (corpus[:1] + corpus_param[:1] + model[:1] 
+                     + model_param[:1] + '-' + phrase)
     
     result = [{result_phrase: ((1.0 / len(phrase)) - (i * .01)) } 
                  for i in xrange(n)]
@@ -32,8 +32,9 @@ class DataHandler(web.RequestHandler):
         corpus = self.get_argument('corpus').split('.')[0]
         corpus_param = self.get_argument('corpus').split('.')[1]
         
-        model = self.get_argument('model').split('.')[0]
-        model_param = self.get_argument('model').split('.')[1]
+        model_arg = self.get_argument('model').split('.')
+        model = model_arg[0]
+        model_param = model_arg[1] if len(model_arg) == 2 else ""
         
         phrase = self.get_argument('phrase')
 
