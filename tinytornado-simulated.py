@@ -62,7 +62,7 @@ if __name__ == "__main__":
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)
-    port = 8080
+    port = 9090
     application.listen(port)
     print "server listening on port", port
     ioloop.IOLoop.instance().start()
