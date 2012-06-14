@@ -1,11 +1,19 @@
-/* TAG */
+/** ** TAG ** **/
 
-/* CLASS */
-.topBorder {
-    border-top: solid thin black;
+
+
+/** ** CLASS ** **/
+.container{
+    width: 100%;
 }
-.modal-body {
-    overflow-y: scroll;
+
+.modal {
+    display: none;
+    width: auto;
+}
+
+.modal-body button {
+    width: 90px;
 }
 
 .odd-nth-phrase{
@@ -24,21 +32,6 @@
     white-space: nowrap;
 }
 
-/*
-.queryResultFailure {
-    border: solid thin black;
-    float: left;
-    margin: 4px;
-    min-height: 108px;
-    /* max-height: 234px; */
-    height: 475px;
-    min-width: 220px;
-    overflow-y: auto;
-    padding: 4px;
-    white-space: nowrap;
-}
-*/
-
 .queryResult th{
     border-bottom: solid thin black;
     text-align: left;
@@ -54,12 +47,12 @@
     vertical-align: text-bottom;
 }
 
-.container{
-    width: 100%;
-}
-
 .row {
     margin-left: 0;
+}
+
+.topBorder {
+    border-top: solid thin black;
 }
 
 /* Bootstrappy thing */
@@ -74,16 +67,20 @@
 
 
 
-/* ID */
+/** ** ID ** **/
+
+#exportModal {
+    width: 505px;
+}
+
+#selectionModal .modal-body{
+    overflow-y: scroll;
+}
+
 #root {
     display: none;
     margin-left: auto;
     margin-right: auto;
-    width: auto;
-}
-
-#selectionModal {
-    display: none;
     width: auto;
 }
 
