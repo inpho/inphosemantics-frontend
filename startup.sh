@@ -1,1 +1,0 @@
-nice -n 10 python tinytornado.py &
