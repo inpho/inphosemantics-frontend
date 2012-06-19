@@ -1,103 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
+<head>
+<meta charset="utf-8">
 
-    <title>InPhOSemantics</title>
+<title>InPhOSemantics</title>
 
-    <!-- Le styles -->
-    <link href="/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="/lib/css/inphosemantics.css" rel="stylesheet">
-    <!-- <link href="/lib/css/model.css" rel="stylesheet">  I don't think this exists. -->
+<link href="/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/lib/css/inphosemantics.css" rel="stylesheet">
 
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 
-  </head>
+</head>
 
-  <body>
-    <div class="navbar">
-      <div class="navbar-inner">
-	<div class="container">
-	  <div>
-	    <a class="brand" href="">InPhOSemantics</a>
-	    
-	    <ul class="nav">
-	      <li class="divider-vertical"></li>
-	      <li><a data-toggle="modal" href="#selectionModal" id="makeSelections">Make Selections</a></li>
-	      <li class="divider-vertical"></li>
-	    </ul>
-	  </div>
-	</div>
-      </div>
-    </div>
+<body>
+<div class="navbar">
+  <div class="navbar-inner">
     <div class="container">
-      <div class="row">
-	<br />
-
-	<table class="table" id="root">
-	  <tbody>
-	    <tr>
-	    </tr>
-	  </tbody>
-	</table>
-
-	<!-- Begin "Make Selections" modal -->
-	<div class="modal" id="selectionModal">
-	  <div class="modal-header">
-	    <a class="close" data-dismiss="modal">&times;</a>
-	    <h3>Make Selections</h3>
-	  </div>
-	  <div class="modal-body">
-	    <form class="form-inline">
-	      <select class="span5" id="corporaSelect">
-	      </select>
-	      <button id="corporaSubmit" type="submit" class="btn">Add Corpus</button>
-	    </form>
-	    <ul class="unstyled" id="currentCorpora">
-	    </ul>
-	    <hr />
-	    <form class="form-inline">
-	      <select class="span5" id="modelsSelect">
-	      </select>
-	      <button id="modelsSubmit" type="submit" class="btn">Add Model</button>
-	    </form>
-	    <ul class="unstyled" id="currentModels">
-	    </ul>
-	    <hr />
-	    <form class="form-search" id="search">
-	      <input id="searchTerm" type="text" class="search-query span5" placeholder="Add a search phrase...">
-	    </form>
-	    <ul class="unstyled" id="currentPhrases">
-	    </ul>
-	    <hr />
-	    <form class="form-inline" id="searchLimit">
-	      Set number of results to be returned: <input class="span1" id="limit" type="text">
-	      <button class="btn">Set</button>
-	    </form>
-	  </div>
-	  <div class="modal-footer">
-	    <button class="btn btn-primary" id="querySubmit">Submit Query</button>
-	    <button class="btn" id="queryReset">Reset</button>
-	  </div>
-	</div>
-	<!-- End "Make Selections" modal -->
-
-      </div>
+      <a class="brand" href="">InPhOSemantics</a>
+      <ul class="nav">
+  	<li class="divider-vertical"></li>
+  	<li><a data-toggle="modal" href="#selectionModal" id="makeSelections">Make Selections</a></li>
+  	<li class="divider-vertical"></li>
+        <li><a data-toggle="modal" href="#exportModal" id="exportCSV">Export Data</a></li>
+        <li class="divider-vertical"></li>
+      </ul>
     </div>
+  </div>
+</div>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/lib/js/jquery.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-modal.js"></script>
-    <script src="/lib/js/bootstrap.js"></script>
-    <script src="/lib/js/Hash.js"></script>
-    <script src="/lib/js/inphosemantics.js"></script>
+<!-- Begin "Make Selections" modal -->
+<div class="modal" id="selectionModal">
+  <form id="formSearch" class="form-horizontal" action="/" method="GET">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3>Make Selections</h3>
+    </div> <!-- modal-header -->
+    
+    <div class="modal-body">
+      <!-- Add Corpus -->
+      <div class="group" id="corpora">
+        <ul class="unstyled"></ul>
+        <select class="span5"></select>
+        <button type="button" class="btn">Add Corpus</button>
+        <input type="hidden" name="corpora" />
+      </div>
+      <hr />
+      
+      <!-- Add Model -->
+      <div class="group" id="models">
+        <ul class="unstyled"></ul>
+        <select class="span5"></select>
+        <button type="button" class="btn">Add Model</button>
+        <input type="hidden" name="models" />
+      </div>
+      <hr />
+      
+      <!-- Add Phrase -->
+      <div class="group" id="phrases">
+        <ul class="unstyled"></ul>
+        <input type="text" class="search-query span5" placeholder="Add a search phrase..." />
+        <button type="button" class="btn">Add Phrase</button>
+        <input type="hidden" name="phrases" />
+      </div>
+      <hr />
+      
+      <!-- Search Limit -->
+      <div class="group" id="limit">
+        Number of results to be returned: 
+        <input id="searchLimit" class="span1" name="searchLimit" type="text">
+      </div>
+      
+    </div> <!-- modal-body -->
+    
+    <div class="modal-footer">
+      <button class="btn" id="queryReset">Reset</button>
+      <button class="btn btn-primary" type="submit">Submit Query</button>
+    </div> <!-- .modal-footer -->
+    
+  </form>
+</div>
+<!-- End "Make Selections" modal -->
 
-  </body>
+<!-- Export Modal -->
+<div class="modal" id="exportModal">
+  <form id="formExport" class="form-horizontal" action="/" method="GET">
+    <div class="modal-header">
+      <h3>Export Data</h3>
+      <a class="close" data-dismiss="modal">&times;</a>
+      <p>This tool is used to export a matrix of term similarities from the backend into a comma separated <a href="http://www.indiana.edu/~semantic/word2word/index.php">Word2Word</a> format.</p>
+    </div> <!-- .modal-header -->
+    
+    <div class="modal-body">
+      Select Corpus:
+      <br />
+      <select class="span5" id="exportCorpus"></select>
+      <hr />
+      Select Model:
+      <br />
+      <select class="span5" id="exportModel"></select>
+      <hr />
+
+      Select Term:
+      <br />
+      <input  class="span5" id="exportPhrase" placeholder="Terms similar to..." type="text" />
+      <hr />
+
+      Select Matrix Size:
+      <br /><input  class="span5" id="exportCount"  placeholder="Number of Terms" type="text" />
+
+    </div> <!-- .modal-body -->
+    
+    <div class="modal-footer">
+      <button class="btn" id="exportCloseBtn">Close</button>
+      <button class="btn btn-primary" id="exportExportBtn" type="submit">Export</button>
+    </div> <!-- .modal-footer -->
+
+  </form>
+
+</div> <!-- #exportModal -->
+
+<!-- End Export Modal --> 
+
+<div class="container" id="content"></div>
+
+<script src="/lib/js/jquery.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.js"></script>
+<script src="/lib/js/bootstrap.js"></script>
+<script src="/lib/js/inphosemantics.js"></script>
+</body>
 </html>

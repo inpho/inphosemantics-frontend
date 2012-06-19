@@ -1,0 +1,97 @@
+##<%namespace name="bootstrap" file="/bootstrap-form.html" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<title>InPhOSemantics</title>
+
+<link href="/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/lib/css/inphosemantics.css" rel="stylesheet">
+
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+<div class="navbar">
+  <div class="navbar-inner">
+  	<div class="container">
+  	  <div>
+  	    <a class="brand" href="">InPhOSemantics</a>
+  	    
+  	    <ul class="nav">
+  	      <li class="divider-vertical"></li>
+  	      <li><a data-toggle="modal" href="#selectionModal" id="makeSelections">Make Selections</a></li>
+  	      <li class="divider-vertical"></li>
+  	    </ul>
+  	  </div>
+  	</div>
+  </div>
+</div>
+
+<!-- Begin "Make Selections" modal -->
+<div class="modal" id="selectionModal">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h3>Make Selections</h3>
+  </div> <!-- modal-header -->
+
+  <div class="modal-body">
+
+    <form class="form-horizontal" id="modalForm">
+      <!-- Add Corpus -->
+      <select class="span5" id="corporaSelect"></select>
+      <button id="corporaSubmit" type="submit" class="btn">Add Corpus</button>
+      <ul class="unstyled" id="currentCorpora"></ul>
+      <hr />
+
+
+      <!-- Add Model -->
+      <select class="span5" id="modelsSelect"></select>
+      <button id="modelsSubmit" type="submit" class="btn">Add Model</button>
+      <ul class="unstyled" id="currentModels"></ul>
+      <hr />
+      
+      <!-- Add Phrase -->
+      <input id="searchTerm" type="text" class="search-query span5" placeholder="Add a search phrase...">
+      <ul class="unstyled" id="currentPhrases"></ul>
+      <hr />
+
+      <!-- Search Limit -->
+      Set number of results to be returned: <input class="span1" id="limit" type="text">
+      <button class="btn">Set</button>
+
+    </form>
+
+  </div> <!-- modal-body -->
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" id="querySubmit">Submit Query</button>
+    <button class="btn" id="queryReset">Reset</button>
+  </div> <!-- modal-footer -->
+
+</div>
+<!-- End "Make Selections" modal -->
+
+<div class="container">
+  <div class="row" id="content">
+
+  </div>
+</div>
+
+<script src="/lib/js/jquery.js"></script>
+<script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-modal.js"></script>
+<script src="/lib/js/bootstrap.js"></script>
+<script src="/lib/js/inphosemantics.js"></script>
+<script>
+inpho.semantics.load($('#content'));
+inpho.semantics.populate_modal($('#selectionModal'));
+</script>
+</body>
+</html>

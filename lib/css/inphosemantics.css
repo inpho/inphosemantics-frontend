@@ -1,38 +1,86 @@
-/* TAG */
+/** ** TAG ** **/
 
-/* CLASS */
-/* A gift for later */
+
+
+/** ** CLASS ** **/
+.container{
+    width: 100%;
+}
+
+.modal {
+    display: none;
+    width: auto;
+}
+
+.modal-body button {
+    width: 90px;
+}
+
 .odd-nth-phrase{
     background-color: #eee;
 }
 
-
-.container{
-    width: 100%;
+.queryResult {
+    border: solid thin black;
+    float: left;
+    margin: 4px;
+    /* max-height: 486px; */
+    height: 475px;
+    min-width: 220px;
+    overflow-y: auto;
+    padding: 4px;
+    white-space: nowrap;
 }
+
+.queryResult th{
+    border-bottom: solid thin black;
+    text-align: left;
+}
+
+.queryResult td{
+    text-align: left;
+    width: 100px;
+}
+
+.remove-X {
+    float: none;
+    vertical-align: text-bottom;
+}
+
 .row {
     margin-left: 0;
 }
 
+.topBorder {
+    border-top: solid thin black;
+}
+
+/* Bootstrappy thing */
+/* Used to remove lots of extra whitespace. */
 .table td {
     padding: 0;
 }
-
 .table th {
     padding: 0;
 }
 
 
-/* ID */
+
+
+/** ** ID ** **/
+
+#exportModal {
+    width: 505px;
+}
+
+#selectionModal .modal-body{
+    overflow-y: scroll;
+}
+
 #root {
     display: none;
     margin-left: auto;
     margin-right: auto;
-    width: auto;
-}
-
-#selectionModal {
-    display: none;
     width: auto;
 }
 

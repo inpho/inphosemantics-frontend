@@ -1,7 +1,9 @@
 #!/usr/bin/python
+import json
 
 import inphosemantics
 from inphosemantics import inpho
+
 from tornado import ioloop, web
 
 
@@ -55,10 +57,10 @@ model_instances = {
         inpho.InphoViewer('philpapers', 'complete', 'beagleorder'),
     ('philpapers', 'complete', 'beagle', 'composite'):
         inpho.InphoViewer('philpapers', 'complete', 'beaglecomposite'),
-    ('philpapers', 'complete', 'tf', ''):
-        inpho.InphoViewer('philpapers', 'complete', 'tf'),
+#    ('philpapers', 'complete', 'tf', ''):
+#        inpho.InphoViewer('philpapers', 'complete', 'tf'),
 #    ('philpapers', 'complete', 'tfidf', ''):
-#       inpho.InphoViewer('philpapers', 'complete', 'tfidf')
+#        inpho.InphoViewer('philpapers', 'complete', 'tfidf')
     }
 
 stored_results = dict()
@@ -117,13 +119,36 @@ def get_similarities(corpus, corpus_param, model, model_param,
     else:
         result = result[:n]
             
-    result = {'result': 
-              [{term: '{0:^.3f}'.format(float(value))} 
-               for (term, value) in result]}
+    result = [{term: '{0:^.3f}'.format(float(value))} 
+                 for (term, value) in result]
     print 'Result', result
 
     return result
 
+class ExportHandler(web.RequestHandler):
+
+    def get(self):
+        try:
+            # fetch the params
+            corpus = self.get_argument('corpus')
+            param  = self.get_argument('corpusParam')
+            model  = self.get_argument('model')        
+            phrase = self.get_argument('phrase')            
+            width  = int(self.get_argument('matrixWidth'))
+
+            # Do the work
+            result = inpho.get_Word2Word_csv(corpus, param, model, phrase, width)
+
+            self.set_header("Content-Type", "application/json; charset=UTF-8")
+            self.write(json.dumps(result))
+
+        except:
+            self.send_error( reason = 'Uncaught error in ExportHandler' )
+
+
+    def write_error(self, status_code, reason = None, **kwargs):
+        self.finish(reason)
+            
 
 class DataHandler(web.RequestHandler):
     
@@ -143,7 +168,8 @@ class DataHandler(web.RequestHandler):
         try:
             result = get_similarities(corpus, corpus_param, model,
                                       model_param, phrase, searchLimit)
-            self.finish(result)
+            self.write(json.dumps(result))
+            self.set_header("Content-Type", "application/json; charset=UTF-8")
             
         except CorpusError:
             self.send_error( reason = 'corpus')
@@ -185,10 +211,13 @@ if __name__ == "__main__":
 
     handlers = [(r'/', IndexHandler),
                 (r'/data', DataHandler),
+                (r'/export', ExportHandler),
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)
 
-    application.listen(8080)
+    port = 8080
+    print 'Inphosemantics Frontend listening on port:', port
+    application.listen(port)
     ioloop.IOLoop.instance().start()
 
