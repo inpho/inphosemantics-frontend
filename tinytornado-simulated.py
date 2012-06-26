@@ -25,6 +25,14 @@ def dummy_data(corpus, corpus_param, model, model_param, phrase, n):
 
 # TODO: add concurrency
 
+class IndexHandler(web.RequestHandler):
+
+    def get(self):
+        #template = Template(filename='templates/index.html')
+        #self.write(template.render())
+        self.render('index.html')
+
+
 class DataHandler(web.RequestHandler):
     def get(self):
         # TODO: try / catch : raise new 400 exception
@@ -48,17 +56,38 @@ class DataHandler(web.RequestHandler):
         self.set_header("Content-Type", "application/json; charset=UTF-8")
 
 
-class IndexHandler(web.RequestHandler):
+class ExportHandler(web.RequestHandler):
 
     def get(self):
-        #template = Template(filename='templates/index.html')
-        #self.write(template.render())
-        self.render('index.html')
+        try:
+            # fetch the parameters
+            corpus = self.get_argument('corpus')
+            param  = self.get_argument('corpusParam')
+            model  = self.get_argument('model')
+            phrase = self.get_argument('phrase')
+            width  = int(self.get_argument('matrixWidth'))
 
+            # Perform backend work
+            #result = inpho.get_Word2Word_csv(corpus, param, model, phrase, width)
+            result = "[exportQueryResult]"
+            
+            # Return the result
+            self.set_header("Content-Type", "application/json; charset=UTF-8")
+            self.write(json.dumps(result))
+
+        except:
+            self.send_error( reason = "Uncaught error in ExportHandler" )
+
+    def write_error(self, status_code, reason = None, **kwargs):
+        self.finish(reason)
+
+        
+    
 if __name__ == "__main__":
 
     handlers = [(r'/', IndexHandler),
                 (r'/data', DataHandler),
+                (r'/export', ExportHandler),
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)

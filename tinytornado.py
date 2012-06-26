@@ -125,30 +125,12 @@ def get_similarities(corpus, corpus_param, model, model_param,
 
     return result
 
-class ExportHandler(web.RequestHandler):
+
+class IndexHandler(web.RequestHandler):
 
     def get(self):
-        try:
-            # fetch the params
-            corpus = self.get_argument('corpus')
-            param  = self.get_argument('corpusParam')
-            model  = self.get_argument('model')        
-            phrase = self.get_argument('phrase')            
-            width  = int(self.get_argument('matrixWidth'))
+        self.render('index.html')
 
-            # Do the work
-            result = inpho.get_Word2Word_csv(corpus, param, model, phrase, width)
-
-            self.set_header("Content-Type", "application/json; charset=UTF-8")
-            self.write(json.dumps(result))
-
-        except:
-            self.send_error( reason = 'Uncaught error in ExportHandler' )
-
-
-    def write_error(self, status_code, reason = None, **kwargs):
-        self.finish(reason)
-            
 
 class DataHandler(web.RequestHandler):
     
@@ -200,11 +182,50 @@ class DataHandler(web.RequestHandler):
             self.finish('Uncaught error')
 
 
-class IndexHandler(web.RequestHandler):
+class ExportHandler(web.RequestHandler):
 
     def get(self):
-        self.render('index.html')
+        try:
+            # fetch the params
+            corpus = self.get_argument('corpus')
+            param  = self.get_argument('corpusParam')
+            model  = self.get_argument('model')        
+            phrase = self.get_argument('phrase')            
+            width  = int(self.get_argument('matrixWidth'))
+
+            # Do the work
+            result = inpho.get_Word2Word_csv(corpus, param, model, phrase, width)
+
+            self.set_header("Content-Type", "application/json; charset=UTF-8")
+            self.write(json.dumps(result))
+
+        except CorpusError:
+            self.send_error( reason = 'corpus')
+       
+        except ModelError:
+            self.send_error( reason = 'model')
         
+        except PhraseError:
+            self.send_error( reason = 'phrase')
+
+        except LimitError:
+            self.send_error( reason = 'limit')
+            
+        except:
+            self.send_error()
+
+    def write_error(self, status_code, reason = None, **kwargs):
+
+        if reason == 'corpus':
+            self.finish('Corpus not available')
+        elif reason == 'model':
+            self.finish('Model not available')
+        elif reason == 'phrase':
+            self.finish('Phrase not available')
+        elif reason == 'limit':
+            self.finish('Search result limit problematic.')
+        else:
+            self.finish('Uncaught error')
 
 
 if __name__ == "__main__":
@@ -216,7 +237,7 @@ if __name__ == "__main__":
         
     application = web.Application(handlers)
 
-    port = 8080
+    port = 9090
     print 'Inphosemantics Frontend listening on port:', port
     application.listen(port)
     ioloop.IOLoop.instance().start()
