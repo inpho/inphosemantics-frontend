@@ -193,16 +193,17 @@ class ExportHandler(web.RequestHandler):
         try:
             # fetch the params
             corpus = self.get_argument('corpus')
-            param  = self.get_argument('corpusParam')
             model  = self.get_argument('model')        
-            phrase = self.get_argument('phrase')            
+            phrase = self.get_argument('phrase')
+            # Optional arguments
+            param  = self.get_argument('corpusParam')
             width  = int(self.get_argument('matrixWidth'))
 
             # Do the work
-            result = inpho.get_Word2Word_csv(corpus, param, model, phrase, width)
+            result = inpho.get_Word2Word_csv(corpus, model, phrase, corpusParam=param, matrixWidth=width)
 
-            self.set_header("Content-Type", "application/json; charset=UTF-8")
             self.write(json.dumps(result))
+            self.set_header("Content-Type", "application/json; charset=UTF-8")
 
         except CorpusError:
             self.send_error( reason = 'corpus')
@@ -216,9 +217,6 @@ class ExportHandler(web.RequestHandler):
         except MatrixWidthError:
             self.send_error( reason = 'matrixWidth')
             
-        except:
-            self.send_error()
-
     def write_error(self, status_code, reason = None, **kwargs):
 
         if reason == 'corpus':
