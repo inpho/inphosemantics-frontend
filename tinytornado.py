@@ -74,6 +74,11 @@ class ModelError(Exception):
 class PhraseError(Exception):
     pass
 
+class LimitError(Exception):
+    pass
+
+class MatrixWidthError(Exception):
+    pass
 
 def get_model(corpus, corpus_param, model, model_param):
     
@@ -208,8 +213,8 @@ class ExportHandler(web.RequestHandler):
         except PhraseError:
             self.send_error( reason = 'phrase')
 
-        except LimitError:
-            self.send_error( reason = 'limit')
+        except MatrixWidthError:
+            self.send_error( reason = 'matrixWidth')
             
         except:
             self.send_error()
@@ -217,13 +222,13 @@ class ExportHandler(web.RequestHandler):
     def write_error(self, status_code, reason = None, **kwargs):
 
         if reason == 'corpus':
-            self.finish('Corpus not available')
+            self.finish('Corpus not available.')
         elif reason == 'model':
-            self.finish('Model not available')
+            self.finish('Model not available.')
         elif reason == 'phrase':
-            self.finish('Phrase not available')
-        elif reason == 'limit':
-            self.finish('Search result limit problematic.')
+            self.finish('Phrase not available.')
+        elif reason == 'matrixWidth':
+            self.finish('Matrix Width Error.')
         else:
             self.finish('Uncaught error')
 
