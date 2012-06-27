@@ -240,7 +240,7 @@ if __name__ == "__main__":
         
     application = web.Application(handlers)
 
-    port = 9090
+    port = 8080
     print 'Inphosemantics Frontend listening on port:', port
     application.listen(port)
     ioloop.IOLoop.instance().start()
