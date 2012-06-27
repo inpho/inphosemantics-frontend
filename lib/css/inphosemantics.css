@@ -33,6 +33,11 @@
     background-color: #eee;
 }
 
+.queryHeader {
+    padding: 4px;
+    text-align: center;
+}
+
 .queryResult {
     border: solid thin black;
     float: left;
@@ -41,9 +46,9 @@
     /*height: 475px; */
     min-width: 200px;
     /*overflow-y: auto; */
-    padding: 4px;
     white-space: nowrap;
 }
+
 
 .queryResult th{
     border-bottom: solid thin black;
