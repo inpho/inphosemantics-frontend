@@ -201,7 +201,7 @@ class ExportHandler(web.RequestHandler):
 
             # Do the work
             result = inpho.get_Word2Word_csv(corpus, model, phrase, corpusParam=param, matrixWidth=width)
-
+            
             self.write(json.dumps(result))
             self.set_header("Content-Type", "application/json; charset=UTF-8")
 
