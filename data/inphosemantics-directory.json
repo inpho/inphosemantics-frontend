@@ -1,92 +1,148 @@
  {"sep.complete":
-    {"long label": "Stanford Encyclopedia of Philosophy: Complete",
+    {"backgroundcolor": "#bd362f",
+     "fontcolor":"#fff",
+     "long label": "Stanford Encyclopedia of Philosophy: Complete",
      "short label": "SEP",
      "models":
       {"beagle.environment":
-        {"long label": "BEAGLE: Environment Vectors", 
+        {"backgroundcolor":"#999",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Environment Vectors", 
          "short label": ""},
        "beagle.context":
-        {"long label": "BEAGLE: Context Vectors",
+        {"backgroundcolor":"#05c",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Context Vectors",
          "short label": ""},
        "beagle.order":
-        {"long label": "BEAGLE: Order Vectors",
+        {"backgroundcolor":"#ffc40d",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Order Vectors",
          "short label": ""},
        "beagle.composite":
-        {"long label": "BEAGLE: Composite Vectors",
+        {"backgroundcolor":"#62c462",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Composite Vectors",
          "short label": ""},
        "tf":
-        {"long label": "Term Frequency",
+        {"backgroundcolor":"pink",
+         "fontcolor":"#fff",
+         "long label": "Term Frequency",
          "short label": "tf"},
        "tfidf":
-        {"long label": "Term Frequency Inverse Document Frequency",
+        {"backgroundcolor":"#7a43b6",
+         "fontcolor":"#fff",
+         "long label": "Term Frequency Inverse Document Frequency",
          "short label": "tfidf"}}
-       },
+      },
   "philpapers.complete":
-    {"long label": "PhilPapers: Complete",
+    {"backgroundcolor":"#46a566",
+     "fontcolor":"#fff",
+     "long label": "PhilPapers: Complete",
      "short label": "PhilPapers",
      "models":
       {"beagle.environment":
-        {"long label": "BEAGLE: Environment Vectors", 
+        {"backgroundcolor":"#999",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Environment Vectors", 
          "short label": ""},
        "beagle.context":
-        {"long label": "BEAGLE: Context Vectors",
+        {"backgroundcolor":"#05c",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Context Vectors",
          "short label": ""},
        "beagle.order":
-        {"long label": "BEAGLE: Order Vectors",
+        {"backgroundcolor":"#ffc40d",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Order Vectors",
          "short label": ""},
        "beagle.composite":
-        {"long label": "BEAGLE: Composite Vectors",
+        {"backgroundcolor":"#62c462",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Composite Vectors",
          "short label": ""},
        "tf":
-        {"long label": "Term Frequency",
+        {"backgroundcolor":"pink",
+         "fontcolor":"#fff",
+         "long label": "Term Frequency",
          "short label": "tf"},
        "tfidf":
-        {"long label": "Term Frequency Inverse Document Frequency",
+        {"backgroundcolor":"#7a43b6",
+         "fontcolor":"#fff",
+         "long label": "Term Frequency Inverse Document Frequency",
          "short label": "tfidf"}}
-       },
+      },
    "malaria.complete":
-     {"long label": "Malaria: Complete",
+     {"backgroundcolor":"#ffc40d",
+      "fontcolor":"#fff",
+      "long label": "Malaria: Complete",
       "short label": "Malaria",
       "models":
       {"beagle.environment":
-        {"long label": "BEAGLE: Environment Vectors", 
+        {"backgroundcolor":"#999",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Environment Vectors", 
          "short label": ""},
        "beagle.context":
-        {"long label": "BEAGLE: Context Vectors",
+        {"backgroundcolor":"#05c",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Context Vectors",
          "short label": ""},
        "beagle.order":
-        {"long label": "BEAGLE: Order Vectors",
+        {"backgroundcolor":"#ffc40d",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Order Vectors",
          "short label": ""},
        "beagle.composite":
-        {"long label": "BEAGLE: Composite Vectors",
+        {"backgroundcolor":"#62c462",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Composite Vectors",
          "short label": ""},
        "tf":
-        {"long label": "Term Frequency",
+        {"backgroundcolor":"pink",
+         "fontcolor":"#fff",
+         "long label": "Term Frequency",
          "short label": "tf"},
        "tfidf":
-        {"long label": "Term Frequency Inverse Document Frequency",
+        {"backgroundcolor":"#7a43b6",
+         "fontcolor":"#fff",
+         "long label": "Term Frequency Inverse Document Frequency",
          "short label": "tfidf"}}
        },
    "iep.complete":
-     {"long label": "Internet Encyclopedia of Philosophy: Complete",
+     {"backgroundcolor":"#048cbd",
+      "fontcolor":"#fff",
+      "long label": "Internet Encyclopedia of Philosophy: Complete",
       "short label": "IEP",
       "models":
       {"beagle.environment":
-        {"long label": "BEAGLE: Environment Vectors", 
+        {"backgroundcolor":"#999",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Environment Vectors", 
          "short label": ""},
        "beagle.context":
-        {"long label": "BEAGLE: Context Vectors",
+        {"backgroundcolor":"#05c",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Context Vectors",
          "short label": ""},
        "beagle.order":
-        {"long label": "BEAGLE: Order Vectors",
+        {"backgroundcolor":"#ffc40d",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Order Vectors",
          "short label": ""},
        "beagle.composite":
-        {"long label": "BEAGLE: Composite Vectors",
+        {"backgroundcolor":"#62c462",
+         "fontcolor":"#fff",
+         "long label": "BEAGLE: Composite Vectors",
          "short label": ""},
        "tf":
-        {"long label": "Term Frequency",
+        {"backgroundcolor":"pink",
+         "fontcolor":"#fff",
+         "long label": "Term Frequency",
          "short label": "tf"},
        "tfidf":
-        {"long label": "Term Frequency Inverse Document Frequency",
+        {"backgroundcolor":"#7a43b6",
+         "fontcolor":"#fff",
+         "long label": "Term Frequency Inverse Document Frequency",
          "short label": "tfidf"}}
        }}
