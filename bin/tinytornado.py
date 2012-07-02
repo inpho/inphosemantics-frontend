@@ -1,12 +1,13 @@
 #!/usr/bin/python
 import json
-
 import inphosemantics
-from inphosemantics import inpho
+from datetime import datetime # Used to show when server comes online.
+from inphosemantics import inpho # Used for semantic processing.
+from tornado import ioloop, web # Web Serving.
 
-from tornado import ioloop, web
 
 
+stored_results = dict()
 model_instance = dict()
 
 model_instances = {
@@ -63,7 +64,13 @@ model_instances = {
 #        inpho.InphoViewer('philpapers', 'complete', 'tfidf')
     }
 
-stored_results = dict()
+
+
+
+#########################
+##  Exception Classes  ##
+#########################
+
 
 class CorpusError(Exception):
     pass
@@ -79,6 +86,14 @@ class LimitError(Exception):
 
 class MatrixWidthError(Exception):
     pass
+
+
+
+
+####################################
+##  Tornado Methods (Overridden)  ##
+####################################
+
 
 def get_model(corpus, corpus_param, model, model_param):
     
@@ -129,6 +144,13 @@ def get_similarities(corpus, corpus_param, model, model_param,
     print 'Result', result
 
     return result
+
+
+
+
+##############################
+##  Tornado Helper Classes  ##
+##############################
 
 
 class IndexHandler(web.RequestHandler):
@@ -231,6 +253,13 @@ class ExportHandler(web.RequestHandler):
             self.finish('Uncaught error')
 
 
+
+
+############
+##  MAIN  ##
+############
+            
+
 if __name__ == "__main__":
 
     handlers = [(r'/', IndexHandler),
@@ -240,8 +269,8 @@ if __name__ == "__main__":
         
     application = web.Application(handlers)
 
-    port = 8080
-    print 'Inphosemantics Frontend listening on port:', port
+    port = 9090
+    print "%s" % datetime.now() + ': Inphosemantics Frontend listening on port %d' % port
     application.listen(port)
     ioloop.IOLoop.instance().start()
 
