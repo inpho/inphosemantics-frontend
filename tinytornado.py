@@ -222,7 +222,11 @@ class ExportHandler(web.RequestHandler):
             width  = int(self.get_argument('matrixWidth'))
 
             # Do the work
-            result = inpho.get_Word2Word_csv(corpus, model, phrase, corpusParam=param, matrixWidth=width)
+            result = inpho.get_Word2Word_csv(corpus=self.get_argument('corpus'),
+                                             corpusParam=self.get_argument('corpusParam'),
+                                             model=self.get_argument('model'),
+                                             phrase=self.get_argument('phrase'),
+                                             matrixWidth=self.get_argument('width'))
             
             self.write(json.dumps(result))
             self.set_header("Content-Type", "application/json; charset=UTF-8")
