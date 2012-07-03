@@ -209,24 +209,27 @@ class DataHandler(web.RequestHandler):
             self.finish('Uncaught error')
 
 
+
+
+
 class ExportHandler(web.RequestHandler):
 
     def get(self):
         try:
-            # fetch the params
-            corpus = self.get_argument('corpus')
-            model  = self.get_argument('model')        
-            phrase = self.get_argument('phrase')
-            # Optional arguments
-            param  = self.get_argument('corpusParam')
-            width  = int(self.get_argument('matrixWidth'))
+            ## fetch the parameters
+            corpus    = self.get_argument('corpus').split('.')[0]
+            param     = self.get_argument('corpus').split('.')[1]
+            modelArgs = self.get_argument('model').split('.')
+            model     = modelArgs[0] + modelArgs[1]
+            phrase    = self.get_argument('phrase')
+            width     = int(self.get_argument('matrixWidth'))
 
-            # Do the work
-            result = inpho.get_Word2Word_csv(corpus=self.get_argument('corpus'),
-                                             corpusParam=self.get_argument('corpusParam'),
-                                             model=self.get_argument('model'),
-                                             phrase=self.get_argument('phrase'),
-                                             matrixWidth=self.get_argument('width'))
+            ## Perform backend work
+            result = inpho.get_Word2Word_csv(corpus      = corpus,
+                                             corpusParam = param,
+                                             model       = model,
+                                             phrase      = phrase,
+                                             matrixWidth = width)
             
             self.write(json.dumps(result))
             self.set_header("Content-Type", "application/json; charset=UTF-8")
@@ -272,8 +275,9 @@ if __name__ == "__main__":
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)
-    port = 8080
-    print "%s" % datetime.now() + ': Inphosemantics Frontend listening on port %d' % port
+    port = 9090
     application.listen(port)
+    print "\n%s" % datetime.now()
+    print "Inphosemantics Frontend @ http://localhost:%d\n" % port
     ioloop.IOLoop.instance().start()
 

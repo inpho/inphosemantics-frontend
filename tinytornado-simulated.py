@@ -60,15 +60,20 @@ class ExportHandler(web.RequestHandler):
 
     def get(self):
         try:
-            # fetch the parameters
-            corpus = self.get_argument('corpus')
-            param  = self.get_argument('corpusParam')
-            model  = self.get_argument('model')
-            phrase = self.get_argument('phrase')
-            width  = int(self.get_argument('matrixWidth'))
+            ## fetch the parameters
+            corpus    = self.get_argument('corpus').split('.')[0]
+            param     = self.get_argument('corpus').split('.')[1]
+            modelArgs = self.get_argument('model').split('.')
+            model     = modelArg[0] + modelArg[1]
+            phrase    = self.get_argument('phrase')
+            width     = int(self.get_argument('matrixWidth'))
 
-            # Perform backend work
-            #result = inpho.get_Word2Word_csv(corpus, param, model, phrase, width)
+            ## Perform backend work
+            # result = inpho.get_Word2Word_csv(corpus      = corpus,
+            #                                 corpusParam = param,
+            #                                 model       = model,
+            #                                 phrase      = phrase,
+            #                                 matrixWidth = width)
             result = "[exportQueryResult]"
             
             # Return the result
@@ -80,9 +85,16 @@ class ExportHandler(web.RequestHandler):
 
     def write_error(self, status_code, reason = None, **kwargs):
         self.finish(reason)
-
         
-    
+
+
+
+############
+##  MAIN  ##
+############
+            
+
+
 if __name__ == "__main__":
 
     handlers = [(r'/', IndexHandler),
@@ -93,6 +105,7 @@ if __name__ == "__main__":
     application = web.Application(handlers)
     port = 9090
     application.listen(port)
-    print "server listening on port", port
+    print "\n%s" % datetime.now()
+    print "Inphosemantics Frontend @ http://localhost:%d\n" % port
     ioloop.IOLoop.instance().start()
 
