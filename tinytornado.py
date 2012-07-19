@@ -10,69 +10,58 @@ from tornado import ioloop, web # Web Serving.
 stored_results = dict()
 exportQueryResults = dict()
 model_instance = dict()
-#inphoViewer = inpho.InphoViewer()
 
 model_instances = {
-    # ('sep', 'complete', 'beagle', 'environment'):
-    #     inphoViewer.fetch('sep', 'complete', 'beagleenvironment'),
-    # ('sep', 'complete', 'beagle', 'context'):\
-    #     inphoViewer.fetch('sep', 'complete', 'beaglecontext'),
-    # ('sep', 'complete', 'beagle', 'order'):\
-    #     inphoViewer.fetch('sep', 'complete', 'beagleorder'),
-    # ('sep', 'complete', 'beagle', 'composite'):\
-    #     inphoViewer.fetch('sep', 'complete', 'beaglecomposite'),
-    # ('sep', 'complete', 'tf', ''):
-    #     inphoViewer.fetch('sep', 'complete', 'tf'),
-    # ('sep', 'complete', 'tfidf', ''):
-    #     inphoViewer.fetch('sep', 'complete', 'tf'),
+    ('sep', 'complete', 'beagle', 'environment'):
+        inpho.InphoViewer('sep', 'complete', 'beagleenvironment'),
+    ('sep', 'complete', 'beagle', 'context'):\
+        inpho.InphoViewer('sep', 'complete', 'beaglecontext'),
+    ('sep', 'complete', 'beagle', 'order'):\
+        inpho.InphoViewer('sep', 'complete', 'beagleorder'),
+    ('sep', 'complete', 'beagle', 'composite'):\
+        inpho.InphoViewer('sep', 'complete', 'beaglecomposite'),
+    ('sep', 'complete', 'tf', ''):
+        inpho.InphoViewer('sep', 'complete', 'tf'),
+    ('sep', 'complete', 'tfidf', ''):
+        inpho.InphoViewer('sep', 'complete', 'tf'),
 
-    # ('sep', 'complete', 'beagle', 'environment'):
-    #     inpho.InphoViewer('sep', 'complete', 'beagleenvironment'),
-    # ('sep', 'complete', 'beagle', 'context'):\
-    #     inpho.InphoViewer('sep', 'complete', 'beaglecontext'),
-    # ('sep', 'complete', 'beagle', 'order'):\
-    #     inpho.InphoViewer('sep', 'complete', 'beagleorder'),
-    # ('sep', 'complete', 'beagle', 'composite'):\
-    #     inpho.InphoViewer('sep', 'complete', 'beaglecomposite'),
-    # ('sep', 'complete', 'tf', ''):
-    #     inpho.InphoViewer('sep', 'complete', 'tf'),
-    # ('sep', 'complete', 'tfidf', ''):
-    #     inpho.InphoViewer('sep', 'complete', 'tf'),
+    ('iep', 'complete', 'beagle', 'environment'):
+        inpho.InphoViewer('iep', 'complete', 'beagleenvironment'),
+    ('iep', 'complete', 'beagle', 'context'):
+        inpho.InphoViewer('iep', 'complete', 'beaglecontext'),
+    ('iep', 'complete', 'beagle', 'order'):
+        inpho.InphoViewer('iep', 'complete', 'beagleorder'),
+    ('iep', 'complete', 'beagle', 'composite'):
+        inpho.InphoViewer('iep', 'complete', 'beaglecomposite'),
+    ('iep', 'complete', 'tf', ''):
+        inpho.InphoViewer('iep', 'complete', 'tf'),
+    ('iep', 'complete', 'tfidf', ''):
+        inpho.InphoViewer('iep', 'complete', 'tfidf'),
+    
+    ('malaria', 'complete', 'beagle', 'environment'):
+        inpho.InphoViewer('malaria', 'complete', 'beagleenvironment'),
+    ('malaria', 'complete', 'beagle', 'context'):
+        inpho.InphoViewer('malaria', 'complete', 'beaglecontext'),
+    ('malaria', 'complete', 'beagle', 'order'):
+        inpho.InphoViewer('malaria', 'complete', 'beagleorder'),
+    ('malaria', 'complete', 'beagle', 'composite'):
+        inpho.InphoViewer('malaria', 'complete', 'beaglecomposite'),
+    ('malaria', 'complete', 'tf', ''):
+        inpho.InphoViewer('malaria', 'complete', 'tf'),
+    ('malaria', 'complete', 'tfidf', ''):
+        inpho.InphoViewer('malaria', 'complete', 'tfidf'),
+    
+    ('philpapers', 'complete', 'beagle', 'environment'):
+        inpho.InphoViewer('philpapers', 'complete', 'beagleenvironment'),
+    ('philpapers', 'complete', 'beagle', 'context'):
+        inpho.InphoViewer('philpapers', 'complete', 'beaglecontext'),
+    ('philpapers', 'complete', 'beagle', 'order'):
+        inpho.InphoViewer('philpapers', 'complete', 'beagleorder'),
+    ('philpapers', 'complete', 'beagle', 'composite'):
+        inpho.InphoViewer('philpapers', 'complete', 'beaglecomposite'),
 
-    # ('iep', 'complete', 'beagle', 'environment'):
-    #     inpho.InphoViewer('iep', 'complete', 'beagleenvironment'),
-    # ('iep', 'complete', 'beagle', 'context'):
-    #     inpho.InphoViewer('iep', 'complete', 'beaglecontext'),
-    # ('iep', 'complete', 'beagle', 'order'):
-    #     inpho.InphoViewer('iep', 'complete', 'beagleorder'),
-    # ('iep', 'complete', 'beagle', 'composite'):
-    #     inpho.InphoViewer('iep', 'complete', 'beaglecomposite'),
-    # ('iep', 'complete', 'tf', ''):
-    #     inpho.InphoViewer('iep', 'complete', 'tf'),
-    # ('iep', 'complete', 'tfidf', ''):
-    #     inpho.InphoViewer('iep', 'complete', 'tfidf'),
-    
-    # ('malaria', 'complete', 'beagle', 'environment'):
-    #     inpho.InphoViewer('malaria', 'complete', 'beagleenvironment'),
-    # ('malaria', 'complete', 'beagle', 'context'):
-    #     inpho.InphoViewer('malaria', 'complete', 'beaglecontext'),
-    # ('malaria', 'complete', 'beagle', 'order'):
-    #     inpho.InphoViewer('malaria', 'complete', 'beagleorder'),
-    # ('malaria', 'complete', 'beagle', 'composite'):
-    #     inpho.InphoViewer('malaria', 'complete', 'beaglecomposite'),
-    # ('malaria', 'complete', 'tf', ''):
-    #     inpho.InphoViewer('malaria', 'complete', 'tf'),
-    # ('malaria', 'complete', 'tfidf', ''):
-    #     inpho.InphoViewer('malaria', 'complete', 'tfidf'),
-    
-    # ('philpapers', 'complete', 'beagle', 'environment'):
-    #     inpho.InphoViewer('philpapers', 'complete', 'beagleenvironment'),
-    # ('philpapers', 'complete', 'beagle', 'context'):
-    #     inpho.InphoViewer('philpapers', 'complete', 'beaglecontext'),
-    # ('philpapers', 'complete', 'beagle', 'order'):
-    #     inpho.InphoViewer('philpapers', 'complete', 'beagleorder'),
-    # ('philpapers', 'complete', 'beagle', 'composite'):
-    #     inpho.InphoViewer('philpapers', 'complete', 'beaglecomposite'),
+    ## These don't exist, so leave them out until we've run these
+    ## and generated the data.
 #    ('philpapers', 'complete', 'tf', ''):
 #        inpho.InphoViewer('philpapers', 'complete', 'tf'),
 #    ('philpapers', 'complete', 'tfidf', ''):
