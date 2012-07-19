@@ -86,37 +86,47 @@
 </div>
 <!-- End "Make Selections" modal -->
 
+
+
+
+
+
 <!-- Export Modal -->
 <div class="modal" id="exportModal">
   <form id="formExport" class="form-horizontal" action="/" method="GET">
     <div class="modal-header">
-      <h3>Export Data</h3>
       <a class="close" data-dismiss="modal">&times;</a>
-      <p>This tool is used to export a matrix of term similarities from the backend into a comma separated <a href="http://www.indiana.edu/~semantic/word2word/index.php">Word2Word</a> format.</p>
+      <h3>Export Data</h3>
+
     </div> <!-- .modal-header -->
-    
+
     <div class="modal-body">
+      <p>This tool is used to export a matrix of term similarities from the backend into a comma separated <a href="http://www.indiana.edu/~semantic/word2word/index.php">Word2Word</a> format.</p>
+
+      <hr />
       Select Corpus:
       <br />
       <select class="span5" id="exportCorpus"></select>
+
       <hr />
       Select Model:
       <br />
       <select class="span5" id="exportModel"></select>
-      <hr />
 
+      <hr />
       Select Term:
       <br />
       <input  class="span5" id="exportPhrase" placeholder="Terms similar to..." type="text" />
-      <hr />
 
+      <hr />
       Select Matrix Size:
-      <br /><input  class="span5" id="exportCount"  placeholder="Number of Terms" type="text" />
+      <br />
+      <input  class="span5" id="exportCount"  placeholder="Number of Terms" type="text" />
 
     </div> <!-- .modal-body -->
     
+    
     <div class="modal-footer">
-      <button class="btn" id="exportCloseBtn">Close</button>
       <button class="btn btn-primary" id="exportExportBtn" type="submit">Export</button>
     </div> <!-- .modal-footer -->
 

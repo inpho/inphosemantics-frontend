@@ -11,7 +11,7 @@
 # Compiled #
 ############
 a.out
-*.javac
+*.class
 *.pyc
 
 # Archives #

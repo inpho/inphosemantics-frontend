@@ -8,6 +8,7 @@ from tornado import ioloop, web # Web Serving.
 
 
 stored_results = dict()
+exportQueryResults = dict()
 model_instance = dict()
 
 model_instances = {
@@ -58,6 +59,9 @@ model_instances = {
         inpho.InphoViewer('philpapers', 'complete', 'beagleorder'),
     ('philpapers', 'complete', 'beagle', 'composite'):
         inpho.InphoViewer('philpapers', 'complete', 'beaglecomposite'),
+
+    ## These don't exist, so leave them out until we've run these
+    ## and generated the data.
 #    ('philpapers', 'complete', 'tf', ''):
 #        inpho.InphoViewer('philpapers', 'complete', 'tf'),
 #    ('philpapers', 'complete', 'tfidf', ''):
@@ -215,36 +219,56 @@ class DataHandler(web.RequestHandler):
 class ExportHandler(web.RequestHandler):
 
     def get(self):
-        try:
-            ## fetch the parameters
-            corpus    = self.get_argument('corpus').split('.')[0]
-            param     = self.get_argument('corpus').split('.')[1]
-            modelArgs = self.get_argument('model').split('.')
-            model     = modelArgs[0] + modelArgs[1]
-            phrase    = self.get_argument('phrase')
-            width     = int(self.get_argument('matrixWidth'))
 
-            ## Perform backend work
-            result = inpho.get_Word2Word_csv(corpus      = corpus,
-                                             corpusParam = param,
-                                             model       = model,
-                                             phrase      = phrase,
-                                             matrixWidth = width)
-            
+        ## fetch the parameters
+        corpus    = self.get_argument('corpus').split('.')[0]
+        param     = self.get_argument('corpus').split('.')[1]
+        modelArgs = self.get_argument('model').split('.')
+        model     = modelArgs[0] + modelArgs[1]
+        phrase    = self.get_argument('phrase')
+        width     = int(self.get_argument('matrixWidth'))
+
+
+        ## See if the result is already cached
+        query = (corpus, param, model, phrase, width)
+        if query in exportQueryResults:
+
+            print 'Found stored Export result'
+            result = exportQueryResults[query]
+
+            ## Write the result back to the requester
             self.write(json.dumps(result))
-            self.set_header("Content-Type", "application/json; charset=UTF-8")
+            self.set_header("Content-Type", "application/json' charset=UTF-8")
+            
+        # Otherwise, actually request the data
+        else:
+            try:
 
-        except CorpusError:
-            self.send_error( reason = 'corpus')
-       
-        except ModelError:
-            self.send_error( reason = 'model')
-        
-        except PhraseError:
-            self.send_error( reason = 'phrase')
+                ## Perform backend work
+                result = inpho.get_Word2Word_csv(corpus      = corpus,
+                                                 corpusParam = param,
+                                                 model       = model,
+                                                 phrase      = phrase,
+                                                 matrixWidth = width)
 
-        except MatrixWidthError:
-            self.send_error( reason = 'matrixWidth')
+                ## Save our find for future adventurers
+                exportQueryResults[query] = result
+
+                ## Write the result back to the requester
+                self.write(json.dumps(result))
+                self.set_header("Content-Type", "application/json; charset=UTF-8")
+
+            except CorpusError:
+                self.send_error( reason = 'corpus')
+                
+            except ModelError:
+                self.send_error( reason = 'model')
+                
+            except PhraseError:
+                self.send_error( reason = 'phrase')
+                
+            except MatrixWidthError:
+                self.send_error( reason = 'matrixWidth')
             
     def write_error(self, status_code, reason = None, **kwargs):
 
@@ -262,6 +286,7 @@ class ExportHandler(web.RequestHandler):
 
 
 
+
 ############
 ##  MAIN  ##
 ############
@@ -271,7 +296,7 @@ if __name__ == "__main__":
 
     handlers = [(r'/', IndexHandler),
                 (r'/data', DataHandler),
-                (r'/export', ExportHandler),
+                (r'/export.csv', ExportHandler),
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)
