@@ -9,77 +9,6 @@ from tornado import ioloop, web # Web Serving.
 
 stored_results = dict()
 exportQueryResults = dict()
-model_instance = dict()
-#inphoViewer = inpho.InphoViewer()
-
-model_instances = {
-    # ('sep', 'complete', 'beagle', 'environment'):
-    #     inphoViewer.fetch('sep', 'complete', 'beagleenvironment'),
-    # ('sep', 'complete', 'beagle', 'context'):\
-    #     inphoViewer.fetch('sep', 'complete', 'beaglecontext'),
-    # ('sep', 'complete', 'beagle', 'order'):\
-    #     inphoViewer.fetch('sep', 'complete', 'beagleorder'),
-    # ('sep', 'complete', 'beagle', 'composite'):\
-    #     inphoViewer.fetch('sep', 'complete', 'beaglecomposite'),
-    # ('sep', 'complete', 'tf', ''):
-    #     inphoViewer.fetch('sep', 'complete', 'tf'),
-    # ('sep', 'complete', 'tfidf', ''):
-    #     inphoViewer.fetch('sep', 'complete', 'tf'),
-
-    # ('sep', 'complete', 'beagle', 'environment'):
-    #     inpho.InphoViewer('sep', 'complete', 'beagleenvironment'),
-    # ('sep', 'complete', 'beagle', 'context'):\
-    #     inpho.InphoViewer('sep', 'complete', 'beaglecontext'),
-    # ('sep', 'complete', 'beagle', 'order'):\
-    #     inpho.InphoViewer('sep', 'complete', 'beagleorder'),
-    # ('sep', 'complete', 'beagle', 'composite'):\
-    #     inpho.InphoViewer('sep', 'complete', 'beaglecomposite'),
-    # ('sep', 'complete', 'tf', ''):
-    #     inpho.InphoViewer('sep', 'complete', 'tf'),
-    # ('sep', 'complete', 'tfidf', ''):
-    #     inpho.InphoViewer('sep', 'complete', 'tf'),
-
-    # ('iep', 'complete', 'beagle', 'environment'):
-    #     inpho.InphoViewer('iep', 'complete', 'beagleenvironment'),
-    # ('iep', 'complete', 'beagle', 'context'):
-    #     inpho.InphoViewer('iep', 'complete', 'beaglecontext'),
-    # ('iep', 'complete', 'beagle', 'order'):
-    #     inpho.InphoViewer('iep', 'complete', 'beagleorder'),
-    # ('iep', 'complete', 'beagle', 'composite'):
-    #     inpho.InphoViewer('iep', 'complete', 'beaglecomposite'),
-    # ('iep', 'complete', 'tf', ''):
-    #     inpho.InphoViewer('iep', 'complete', 'tf'),
-    # ('iep', 'complete', 'tfidf', ''):
-    #     inpho.InphoViewer('iep', 'complete', 'tfidf'),
-    
-    # ('malaria', 'complete', 'beagle', 'environment'):
-    #     inpho.InphoViewer('malaria', 'complete', 'beagleenvironment'),
-    # ('malaria', 'complete', 'beagle', 'context'):
-    #     inpho.InphoViewer('malaria', 'complete', 'beaglecontext'),
-    # ('malaria', 'complete', 'beagle', 'order'):
-    #     inpho.InphoViewer('malaria', 'complete', 'beagleorder'),
-    # ('malaria', 'complete', 'beagle', 'composite'):
-    #     inpho.InphoViewer('malaria', 'complete', 'beaglecomposite'),
-    # ('malaria', 'complete', 'tf', ''):
-    #     inpho.InphoViewer('malaria', 'complete', 'tf'),
-    # ('malaria', 'complete', 'tfidf', ''):
-    #     inpho.InphoViewer('malaria', 'complete', 'tfidf'),
-    
-    # ('philpapers', 'complete', 'beagle', 'environment'):
-    #     inpho.InphoViewer('philpapers', 'complete', 'beagleenvironment'),
-    # ('philpapers', 'complete', 'beagle', 'context'):
-    #     inpho.InphoViewer('philpapers', 'complete', 'beaglecontext'),
-    # ('philpapers', 'complete', 'beagle', 'order'):
-    #     inpho.InphoViewer('philpapers', 'complete', 'beagleorder'),
-    # ('philpapers', 'complete', 'beagle', 'composite'):
-    #     inpho.InphoViewer('philpapers', 'complete', 'beaglecomposite'),
-#    ('philpapers', 'complete', 'tf', ''):
-#        inpho.InphoViewer('philpapers', 'complete', 'tf'),
-#    ('philpapers', 'complete', 'tfidf', ''):
-#        inpho.InphoViewer('philpapers', 'complete', 'tfidf')
-    }
-
-
 
 
 #########################
@@ -105,48 +34,25 @@ class MatrixWidthError(Exception):
 
 
 
-####################################
-##  Tornado Methods (Overridden)  ##
-####################################
+#######################
+##  Tornado Methods  ##
+#######################
 
 
-def get_model(corpus, corpus_param, model, model_param):
-    
-    try:
-        return model_instances[(corpus, corpus_param, 
-                                model, model_param)]
-    except KeyError:
+def get_similarities(corpus, corpus_param, model, phrase, n):
 
-        corpora = [(c, cp) for (c, cp, m, mp) in model_instances.keys()]
-        models = [(m, mp) for (c, cp, m, mp) in model_instances.keys()]
-
-        if (corpus, corpus_param) not in corpora:
-            raise CorpusError(corpus + ' is not available')
-        if (model, model_param) not in models:
-            raise ModelError(model + ' is not available')
-
-
-
-def get_similarities(corpus, corpus_param, model, model_param, 
-                     phrase, n):
-
-    if (corpus, corpus_param, model, model_param, phrase)\
-            in stored_results:
+    if (corpus, corpus_param, model, phrase)  in stored_results:
         print 'Found stored result'
-        result = stored_results[(corpus, corpus_param, model,
-                                 model_param, phrase)]
+        result = stored_results[(corpus, corpus_param, model, phrase)]
 
     else:
-        model_inst = get_model(corpus, corpus_param, 
-                               model, model_param)
+        viewer_inst = inpho.get_viewer(corpus, corpus_param, model)
         try:
-            result = model_inst.similar_terms(phrase, True)
+            result = viewer_inst.similar_terms(phrase, True)
         except:
             raise PhraseError('No word in ' + phrase + ' appears in corpus')
 
-        stored_results[
-            (corpus, corpus_param, model, model_param, phrase)
-            ] = result
+        stored_results[(corpus, corpus_param, model, phrase)] = result
 
 
     if result[0][0] == phrase:
@@ -178,20 +84,21 @@ class DataHandler(web.RequestHandler):
     
     def get(self):
 
+        ## Split the corpus from the corpus parameter.
         corpus = self.get_argument('corpus').split('.')[0]
         corpus_param = self.get_argument('corpus').split('.')[1]
 
+        ## Remove that period between the model and the model parameter.
         model_arg = self.get_argument('model').split('.')
         model = model_arg[0]
-        model_param = model_arg[1] if len(model_arg) == 2 else ""
+        model = model + model_arg[1] if len(model_arg) == 2 else model
+        
 
         phrase = self.get_argument('phrase')
-
         searchLimit = int(self.get_argument('searchLimit'))
 
         try:
-            result = get_similarities(corpus, corpus_param, model,
-                                      model_param, phrase, searchLimit)
+            result = get_similarities(corpus, corpus_param, model, phrase, searchLimit)
             self.write(json.dumps(result))
             self.set_header("Content-Type", "application/json; charset=UTF-8")
             
