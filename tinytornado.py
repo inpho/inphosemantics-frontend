@@ -130,8 +130,10 @@ def get_similarities(corpus, corpus_param, model, model_param,
                                model, model_param)
         try:
             result = model_inst.similar_terms(phrase, True)
+            if not result:
+                raise PhraseError('Phrase \'' + phrase + '\' returned no similarities.')
         except:
-            raise PhraseError('No word in ' + phrase + ' appears in corpus')
+            raise PhraseError('Phrase \'' + phrase + '\' is not available.')
 
         stored_results[
             (corpus, corpus_param, model, model_param, phrase)
