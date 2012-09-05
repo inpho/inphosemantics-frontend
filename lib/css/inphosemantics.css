@@ -33,29 +33,41 @@
     background-color: #eee;
 }
 
+.queryContent {
+    
+}
+
+.queryContent img {
+    display: block;
+    margin: auto auto;
+    vertical-align: middle;
+}
+
 .queryHeader {
     padding: 4px;
     text-align: center;
 }
 
-.queryResult {
+
+.queryPanel {
     border: solid thin black;
     float: left;
     margin: 4px;
     /* max-height: 486px; */
     /*height: 475px; */
+    min-height: 200px;
     min-width: 200px;
     /*overflow-y: auto; */
     white-space: nowrap;
 }
 
 
-.queryResult th{
+.queryPanel th{
     border-bottom: solid thin black;
     text-align: left;
 }
 
-.queryResult td{
+.queryPanel td{
     text-align: left;
     width: 100px;
 }
