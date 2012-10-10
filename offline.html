@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<title>InPhOSemantics</title>
+
+<link href="/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/lib/css/inphosemantics.css" rel="stylesheet">
+
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="">InPhOSemantics</a>
+      <!-- <ul class="nav"> -->
+      <!-- 	<li class="divider-vertical"></li> -->
+  	<!-- <li><a data-toggle="modal" href="#selectionModal" id="makeSelections">Make Selections</a></li> -->
+  	<!-- <li class="divider-vertical"></li> -->
+        <!-- <li><a data-toggle="modal" href="#exportModal" id="exportCSV">Export Data</a></li> -->
+        <!-- <li class="divider-vertical"></li> -->
+      <!-- </ul> -->
+    </div>
+  </div>
+</div>
+
+<!-- <\!-- Begin "Make Selections" modal -\-> -->
+<!-- <div class="modal" id="selectionModal"> -->
+<!--   <form id="formSearch" class="form-horizontal" action="/" method="GET"> -->
+<!--     <div class="modal-header"> -->
+<!--       <a class="close" data-dismiss="modal">&times;</a> -->
+<!--       <h3>Make Selections</h3> -->
+<!--     </div> <\!-- modal-header -\-> -->
+    
+<!--     <div class="modal-body"> -->
+<!--       <\!-- Add Corpus -\-> -->
+<!--       <div class="group" id="corpora"> -->
+<!--         <ul class="unstyled"></ul> -->
+<!--         <select class="span5"></select> -->
+<!--         <button type="button" class="btn">Add Corpus</button> -->
+<!--         <input type="hidden" name="corpora" /> -->
+<!--       </div> -->
+<!--       <hr /> -->
+      
+<!--       <\!-- Add Model -\-> -->
+<!--       <div class="group" id="models"> -->
+<!--         <ul class="unstyled"></ul> -->
+<!--         <select class="span5"></select> -->
+<!--         <button type="button" class="btn">Add Model</button> -->
+<!--         <input type="hidden" name="models" /> -->
+<!--       </div> -->
+<!--       <hr /> -->
+      
+<!--       <\!-- Add Phrase -\-> -->
+<!--       <div class="group" id="phrases"> -->
+<!--         <ul class="unstyled"></ul> -->
+<!--         <input type="text" class="search-query span5" placeholder="Add a search phrase..." /> -->
+<!--         <button type="button" class="btn">Add Phrase</button> -->
+<!--         <input type="hidden" name="phrases" /> -->
+<!--       </div> -->
+<!--       <hr /> -->
+      
+<!--       <\!-- Search Limit -\-> -->
+<!--       <div class="group" id="limit"> -->
+<!--         Number of results to be returned:  -->
+<!--         <input id="searchLimit" class="span1" name="searchLimit" type="text"> -->
+<!--       </div> -->
+      
+<!--     </div> <\!-- modal-body -\-> -->
+    
+<!--     <div class="modal-footer"> -->
+<!--       <button class="btn" id="queryReset">Reset</button> -->
+<!--       <button class="btn btn-primary" id="querySubmit" type="submit">Submit Query</button> -->
+<!--     </div> <\!-- .modal-footer -\-> -->
+    
+<!--   </form> -->
+<!-- </div> -->
+<!-- <\!-- End "Make Selections" modal -\-> -->
+
+
+
+
+
+
+<!-- <\!-- Export Modal -\-> -->
+<!-- <div class="modal" id="exportModal"> -->
+<!--   <form id="formExport" class="form-horizontal" action="/" method="GET"> -->
+<!--     <div class="modal-header"> -->
+<!--       <a class="close" data-dismiss="modal">&times;</a> -->
+<!--       <h3>Export Data</h3> -->
+
+<!--     </div> <\!-- .modal-header -\-> -->
+
+<!--     <div class="modal-body"> -->
+<!--       <p>This tool is used to export a matrix of term similarities from the backend into a comma separated <a href="http://www.indiana.edu/~semantic/word2word/index.php">Word2Word</a> format.</p> -->
+
+<!--       <hr /> -->
+<!--       Select Corpus: -->
+<!--       <br /> -->
+<!--       <select class="span5" id="exportCorpus"></select> -->
+
+<!--       <hr /> -->
+<!--       Select Model: -->
+<!--       <br /> -->
+<!--       <select class="span5" id="exportModel"></select> -->
+
+<!--       <hr /> -->
+<!--       Select Term: -->
+<!--       <br /> -->
+<!--       <input  class="span5" id="exportPhrase" placeholder="Terms similar to..." type="text" /> -->
+
+<!--       <hr /> -->
+<!--       Select Matrix Size: -->
+<!--       <br /> -->
+<!--       <input  class="span5" id="exportCount"  placeholder="Number of Terms" type="text" /> -->
+
+<!--     </div> <\!-- .modal-body -\-> -->
+    
+    
+<!--     <div class="modal-footer"> -->
+<!--       <button class="btn btn-primary" id="exportExportBtn" type="submit">Export</button> -->
+<!--     </div> <\!-- .modal-footer -\-> -->
+
+<!--   </form> -->
+
+<!-- </div> <\!-- #exportModal -\-> -->
+
+<!-- End Export Modal --> 
+
+<div class="container" id="content">
+
+This service is temporarily unavailable while we are training new
+corpus models. Please excuse the inconvenience.
+
+</div>
+
+<script src="/lib/js/jquery.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.js"></script>
+<script src="/lib/js/bootstrap.js"></script>
+<script src="/lib/js/inphosemantics.js"></script>
+</body>
+</html>

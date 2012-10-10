@@ -162,7 +162,7 @@ def get_similarities(corpus, corpus_param, model, model_param,
 class IndexHandler(web.RequestHandler):
 
     def get(self):
-        self.render('index.html')
+        self.render('offline.html')
 
 
 class DataHandler(web.RequestHandler):
