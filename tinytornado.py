@@ -1,8 +1,7 @@
 #!/usr/bin/python
 import json
-import inphosemantics
+from inphosemantics import *
 from datetime import datetime # Used to show when server comes online.
-from inphosemantics import inpho # Used for semantic processing.
 from tornado import ioloop, web # Web Serving.
 
 
@@ -13,59 +12,17 @@ model_instance = dict()
 
 model_instances = {
     ('sep', 'complete', 'beagle', 'environment'):
-        inpho.InphoViewer('sep', 'complete', 'beagleenvironment'),
-    ('sep', 'complete', 'beagle', 'context'):\
-        inpho.InphoViewer('sep', 'complete', 'beaglecontext'),
-    ('sep', 'complete', 'beagle', 'order'):\
-        inpho.InphoViewer('sep', 'complete', 'beagleorder'),
-    ('sep', 'complete', 'beagle', 'composite'):\
-        inpho.InphoViewer('sep', 'complete', 'beaglecomposite'),
-    ('sep', 'complete', 'tf', ''):
-        inpho.InphoViewer('sep', 'complete', 'tf'),
-    ('sep', 'complete', 'tfidf', ''):
-        inpho.InphoViewer('sep', 'complete', 'tf'),
-
-    ('iep', 'complete', 'beagle', 'environment'):
-        inpho.InphoViewer('iep', 'complete', 'beagleenvironment'),
-    ('iep', 'complete', 'beagle', 'context'):
-        inpho.InphoViewer('iep', 'complete', 'beaglecontext'),
-    ('iep', 'complete', 'beagle', 'order'):
-        inpho.InphoViewer('iep', 'complete', 'beagleorder'),
-    ('iep', 'complete', 'beagle', 'composite'):
-        inpho.InphoViewer('iep', 'complete', 'beaglecomposite'),
-    ('iep', 'complete', 'tf', ''):
-        inpho.InphoViewer('iep', 'complete', 'tf'),
-    ('iep', 'complete', 'tfidf', ''):
-        inpho.InphoViewer('iep', 'complete', 'tfidf'),
-    
-    ('malaria', 'complete', 'beagle', 'environment'):
-        inpho.InphoViewer('malaria', 'complete', 'beagleenvironment'),
-    ('malaria', 'complete', 'beagle', 'context'):
-        inpho.InphoViewer('malaria', 'complete', 'beaglecontext'),
-    ('malaria', 'complete', 'beagle', 'order'):
-        inpho.InphoViewer('malaria', 'complete', 'beagleorder'),
-    ('malaria', 'complete', 'beagle', 'composite'):
-        inpho.InphoViewer('malaria', 'complete', 'beaglecomposite'),
-    ('malaria', 'complete', 'tf', ''):
-        inpho.InphoViewer('malaria', 'complete', 'tf'),
-    ('malaria', 'complete', 'tfidf', ''):
-        inpho.InphoViewer('malaria', 'complete', 'tfidf'),
-    
-    ('philpapers', 'complete', 'beagle', 'environment'):
-        inpho.InphoViewer('philpapers', 'complete', 'beagleenvironment'),
-    ('philpapers', 'complete', 'beagle', 'context'):
-        inpho.InphoViewer('philpapers', 'complete', 'beaglecontext'),
-    ('philpapers', 'complete', 'beagle', 'order'):
-        inpho.InphoViewer('philpapers', 'complete', 'beagleorder'),
-    ('philpapers', 'complete', 'beagle', 'composite'):
-        inpho.InphoViewer('philpapers', 'complete', 'beaglecomposite'),
-
-    ## These don't exist, so leave them out until we've run these
-    ## and generated the data.
-#    ('philpapers', 'complete', 'tf', ''):
-#        inpho.InphoViewer('philpapers', 'complete', 'tf'),
-#    ('philpapers', 'complete', 'tfidf', ''):
-#        inpho.InphoViewer('philpapers', 'complete', 'tfidf')
+        viewer('sep-beagle-environment'),
+#        inpho.InphoViewer('sep', 'complete', 'beagleenvironment'),
+    ('sep', 'complete', 'beagle', 'context'):
+        viewer('sep-beagle-context'),
+#        inpho.InphoViewer('sep', 'complete', 'beaglecontext'),
+    ('sep', 'complete', 'beagle', 'order'):
+        viewer('sep-beagle-order'),
+#        inpho.InphoViewer('sep', 'complete', 'beagleorder'),
+    ('sep', 'complete', 'beagle', 'composite'):
+        viewer('sep-beagle-composite')
+#        inpho.InphoViewer('sep', 'complete', 'beaglecomposite'),
     }
 
 
@@ -99,7 +56,7 @@ class MatrixWidthError(Exception):
 ####################################
 
 
-def get_model(corpus, corpus_param, model, model_param):
+def choose_viewer(corpus, corpus_param, model, model_param):
     
     try:
         return model_instances[(corpus, corpus_param, 
@@ -126,10 +83,9 @@ def get_similarities(corpus, corpus_param, model, model_param,
                                  model_param, phrase)]
 
     else:
-        model_inst = get_model(corpus, corpus_param, 
-                               model, model_param)
+        viewer = choose_viewer(corpus, corpus_param, model, model_param)
         try:
-            result = model_inst.similar_terms(phrase, True)
+            result = viewer.similar_terms(phrase, filter_nan=True)
             if not result:
                 raise PhraseError('Phrase \'' + phrase + '\' returned no similarities.')
         except:
@@ -302,7 +258,7 @@ if __name__ == "__main__":
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)
-    port = 8080
+    port = 9000
     application.listen(port)
     print "\n%s" % datetime.now()
     print "Inphosemantics Frontend @ http://localhost:%d\n" % port
