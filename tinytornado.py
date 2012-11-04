@@ -51,9 +51,9 @@ class MatrixWidthError(Exception):
 
 
 
-####################################
-##  Tornado Methods (Overridden)  ##
-####################################
+#######################
+##  Tornado Methods  ##
+#######################
 
 
 def choose_viewer(corpus, corpus_param, model, model_param):
@@ -169,10 +169,6 @@ class DataHandler(web.RequestHandler):
             self.finish('Search result limit problematic.')
         else:
             self.finish('Uncaught error')
-
-
-
-
 
 class ExportHandler(web.RequestHandler):
 
