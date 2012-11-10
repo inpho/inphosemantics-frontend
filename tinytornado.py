@@ -84,15 +84,8 @@ def get_similarities(corpus, corpus_param, model, model_param, phrase, n):
 class IndexHandler(web.RequestHandler):
 
     def get(self):
-<<<<<<< HEAD
-        ## Serve the homepage.
-        self.render('index.html')
-
-=======
         self.render('index.html')
         #self.render('offline.html')
->>>>>>> b97ecba247bf885a41ac9eb9938f391e2c7ff19e
-
 
 class DataHandler(web.RequestHandler):
     
