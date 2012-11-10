@@ -199,7 +199,7 @@ if __name__ == "__main__":
                 (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
         
     application = web.Application(handlers)
-    port = 9000
+    port = 8000
     application.listen(port)
     print "\n%s" % datetime.now()
     print "Inphosemantics Frontend @ http://localhost:%d\n" % port
