@@ -34,7 +34,7 @@
 }
 
 .queryContent {
-    
+    min-height: 200px;
 }
 
 .queryContent img {
@@ -55,7 +55,6 @@
     margin: 4px;
     /* max-height: 486px; */
     /*height: 475px; */
-    min-height: 200px;
     min-width: 200px;
     /*overflow-y: auto; */
     white-space: nowrap;
