@@ -56,7 +56,7 @@ def get_similarities(corpus, corpus_param, model, model_param, phrase, n):
 
     viewer = choose_viewer(corpus, corpus_param, model, model_param)
     try:
-        result = viewer.similar_terms(phrase, filter_nan=True)
+        result = viewer.mean_similar_terms(phrase)
         if not result:
             raise PhraseError('Phrase \'' + phrase + '\' returned no similarities.')
     except:
