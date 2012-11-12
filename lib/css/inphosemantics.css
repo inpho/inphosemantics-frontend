@@ -50,24 +50,22 @@
 
 
 .queryPanel {
-    border: solid thin black;
+    border: solid 2pt black;
     float: left;
     margin: 4px;
-    /* max-height: 486px; */
-    /*height: 475px; */
     min-width: 200px;
-    /*overflow-y: auto; */
+    overflow-y: auto; 
     white-space: nowrap;
 }
 
 
 .queryPanel th{
     border-bottom: solid thin black;
-    text-align: left;
+    text-align: center;
 }
 
 .queryPanel td{
-    text-align: left;
+    text-align: center;
     width: 100px;
 }
 
