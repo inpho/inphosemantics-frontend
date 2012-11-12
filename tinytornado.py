@@ -1,8 +1,13 @@
 #!/usr/bin/python
-import json
-from inphosemantics import *
-from datetime import datetime # Used to show when server comes online.
+import json 
+import sys # Command Line Arguments.
+
+from datetime import datetime # Timestamps.
 from tornado import ioloop, web # Web Serving.
+
+from inphosemantics import * # Backend calculations
+
+
 
 stored_viewers = dict()
 
@@ -186,22 +191,30 @@ class ExportHandler(web.RequestHandler):
         else:
             self.finish('Uncaught error')
 
+
+########################
+##  Request Handling  ##
+########################
+handlers = [(r'/', IndexHandler),
+            (r'/data', DataHandler),
+            (r'/export.csv', ExportHandler),
+            (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
+
+
 ############
 ##  MAIN  ##
 ############
-            
-
 if __name__ == "__main__":
 
-    handlers = [(r'/', IndexHandler),
-                (r'/data', DataHandler),
-                (r'/export.csv', ExportHandler),
-                (r'/(.*)', web.StaticFileHandler, dict(path = '.'))]
-        
     application = web.Application(handlers)
-    port = 9000
+
+    port = 8080
+    
+    if len(sys.argv) == 2:
+        port = int(sys.argv[1])
+    
     application.listen(port)
-    print "\n%s" % datetime.now()
+    print datetime.now()
     print "Inphosemantics Frontend @ http://localhost:%d\n" % port
     ioloop.IOLoop.instance().start()
 
